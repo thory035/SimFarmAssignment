@@ -32,11 +32,28 @@ public class Item {
 		}
 	
 		public int getValue() {
-			if (age < maturAge); {
+			if (age < maturAge) {
 				return value;
+			} else {
+				// item is not ready to be harvested
+				return 0;
 			}
-		}
 		
+		}
+
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			}
+			// typecast
+			Item items = (Item) obj;
+			// compare and return
+			return (this.age == items.age)
+					&& (this.maturAge == items.maturAge)
+					&& (this.deathAge == items.deathAge)
+					&& (this.value == items.value);
+		
+		}	
 }
 
 
