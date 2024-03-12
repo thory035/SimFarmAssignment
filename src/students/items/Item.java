@@ -1,28 +1,40 @@
 package students.items;
 // no instantiation for Item class
 public class Item {
-	// tracking (start at 0)
+		// tracking (start at 0)
 		private int age = 0;
 		private int maturAge = 0;
 		private int deathAge = 0;
 		private int value = 0; 
+		
+		// constructor
+		public Item(int maturAge, int deathAge, int value) {
+			this.maturAge = maturAge;
+			this.deathAge = deathAge;
+			this.value = value;
+		}
 
-	// counter: incremental(1)
-	public void tick() {
+		// counter: incremental(1)
+		public void tick() {
 		age++; 
-	}
+		}
 	
-	public int getAge() {
+		public int getAge() {
 		return age;
-	}
-	//(setter)
-	public void setAge(int newAge) {
-		this.age = newAge;
-	}
+		}
+		//(setter)
+		public void setAge(int newAge) {
+			this.age = newAge;
+		}
 
-	public boolean died() {
-		return age > deathAge;
+		public boolean died() {
+			return age > deathAge;	
+		}
+	
+		public int getValue() {
+			if (age < maturAge) {
+				return value;
+		}
 		
 	}
-	
 }
