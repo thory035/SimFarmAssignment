@@ -32,9 +32,11 @@ public class Item {
 		}
 	
 		public int getValue() {
-			if (age < maturAge) {
+			if (age < maturAge); {
 				return value;
+			}
 		}
 		
-	}
 }
+
+
