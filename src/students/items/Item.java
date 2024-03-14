@@ -1,11 +1,11 @@
 package students.items;
 // no instantiation for Item class
-public class Item {
+public abstract class Item {
 		// tracking (start at 0)
-		private int age = 0;
-		private int maturAge = 0;
-		private int deathAge = 0;
-		private int value = 0; 
+		public int age = 0;
+		public int maturAge = 0;
+		public int deathAge = 0;
+		public int value = 0; 
 		
 		// constructor
 		public Item(int maturAge, int deathAge, int value) {
@@ -54,6 +54,9 @@ public class Item {
 					&& (this.value == items.value);
 		
 		}	
+		
+		public abstract String toString();
+		
 }
 
 
