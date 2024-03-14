@@ -32,7 +32,7 @@ public abstract class Item {
 		}
 	
 		public int getValue() {
-			if (age < maturAge) {
+			if (age >= maturAge) {
 				return value;
 			} else {
 				// item is not ready to be harvested

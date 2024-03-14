@@ -7,7 +7,7 @@ public class Apples extends Food {
 		public static int cost = 2;
 		// superclass constructor
 		public Apples() {
-			super(2, 6, 2);
+			super(3, 5, 3);
 			// counter: incremental(1)
 			generationCount++;
 		}
@@ -15,9 +15,9 @@ public class Apples extends Food {
 		@Override
 		public String toString() {
 			if (age < maturAge) {
-				return"A";
+				return"a";
 			} else {
-				return "a";
+				return "A";
 			}
 		}
 		// gets total number of grain instances	
