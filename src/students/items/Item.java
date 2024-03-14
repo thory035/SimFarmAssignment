@@ -52,11 +52,9 @@ public abstract class Item {
 					&& (this.maturAge == items.maturAge)
 					&& (this.deathAge == items.deathAge)
 					&& (this.value == items.value);
-		
 		}	
 		
 		public abstract String toString();
-		
 }
 
 
