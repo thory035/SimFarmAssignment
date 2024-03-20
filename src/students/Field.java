@@ -33,4 +33,11 @@ public class Field {
 		}
 	}
 	
+	// initialise function
+			// for the index at row position
+			// for the index at column position
+				// if at row|column position is not null and soil(instanceof)
+					// calculate random number, check if less than 20% (0.2)
+					// need to import Math.random()??
+					// if true replace soil with weed (new Weed)
 }
