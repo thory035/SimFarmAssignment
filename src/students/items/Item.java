@@ -2,10 +2,10 @@ package students.items;
 // no instantiation for Item class
 public abstract class Item {
 		// tracking (start at 0)
-		public int age = 0;
-		public int maturAge = 0;
-		public int deathAge = 0;
-		public int value = 0; 
+		protected int age = 0;
+		protected int maturAge = 0;
+		protected int deathAge = 0;
+		protected int value = 0; 
 		
 		// constructor
 		public Item(int maturAge, int deathAge, int value) {
@@ -22,6 +22,11 @@ public abstract class Item {
 		public int getAge() {
 		return age;
 		}
+		
+		public int getMaturAge() {
+		return maturAge;
+		}
+		
 		//(setter)
 		public void setAge(int newAge) {
 			this.age = newAge;
@@ -38,16 +43,17 @@ public abstract class Item {
 				// item is not ready to be harvested
 				return 0;
 			}
-		
 		}
 
 		public boolean equals(Object obj) {
 			if (this == obj) {
 				return true;
 			}
-			// typecast
+			if (obj == null || getClass() != obj.getClass()) {
+				return false;
+			}
 			Item items = (Item) obj;
-			// compare and return
+			
 			return (this.age == items.age)
 					&& (this.maturAge == items.maturAge)
 					&& (this.deathAge == items.deathAge)
@@ -55,6 +61,7 @@ public abstract class Item {
 		}	
 		
 		public abstract String toString();
+
 }
 
 

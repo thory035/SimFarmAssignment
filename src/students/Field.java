@@ -5,7 +5,7 @@ import students.items.Soil;
 
 public class Field {
 	// array of items to represent the field size
-	private Item[][] field;
+	public Item[][] field;
 	
 	// initializes array 
 	public Field(int height, int width) {

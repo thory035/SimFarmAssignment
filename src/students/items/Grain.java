@@ -2,7 +2,7 @@ package students.items;
 
 public class Grain extends Food{
 	// counter to track Grain instances
-	private static int generationCount = 0;
+	public static int generationCount = 0;
 	
 	public static int cost = 1;
 	// superclass constructor
