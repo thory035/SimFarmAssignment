@@ -6,8 +6,6 @@ import students.items.Soil;
 import students.items.Weed;
 import students.items.UntilledSoil;
 
-import java.lang.Math;
-
 public class Field {
 	// array of items to represent the field size
 	public Item[][] field;
@@ -16,7 +14,7 @@ public class Field {
 	public Field(int height, int width) {
 		this.field = new Item[height][width];
 		// add new Soil to Field under conditions 
-		for(int row = 0; row < height; row++) {
+		for (int row = 0; row < height; row++) {
 			for (int column = 0; column < width; column++) {
 				// using import to add soil
 				this.field[row][column] = new Soil();
@@ -26,9 +24,9 @@ public class Field {
 
 	public void tick() {
 		// iterate each row
-		for(int row = 0; row < field.length; row++) {
+		for (int row = 0; row < field.length; row++) {
 			// iterate each column
-			for(int column = 0; column < field[row].length; column++) {
+			for (int column = 0; column < field[row].length; column++) {
 				// refers to the instance of Item and assign to variable	
 				Item fieldItem = field[row][column];
 				// check if not null
@@ -78,18 +76,42 @@ public class Field {
 		if (row >= 0 && row < field.length && column < field[row].length) {
 			field[row][column] = new Soil();
 		}
-	
-	public void get(int row,  int column) {
-		
-		if (row >= 0 && row < field.length && column < field[row].length) {
-			Item item = field[row][column];
-			if (item instanceof Food) {
-				return new Food((Food)item);
-			}
-			return null;
-		}
 	}
 	
+	public Object get(int row,  int column) {
+		
+		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
+			Item item = field[row][column];
+			if (item instanceof Food) {
+				return new Food((Food)item).copy();
+			}
+			return item;
+		}
+		return null;
+	}
+	
+	public void plant(int row, int column, Item item) {
+		
+		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
+			this.field[row][column] = item;
+		}
+		
+	}
+	
+	public int getValue() {
+		int totalValue = 0;
+		for (int row = 0; row < field.length; row++) {
+			for(int column = 0; column < field[row].length; column++) {
+				Item fieldItem = field[row][column];
+				if (fieldItem != null) {
+					totalValue += fieldItem.getValue();
+				}
+			}
+		}
+		return totalValue;
+	}
+
+	public String getSummary() {
 		
 	}
 	
