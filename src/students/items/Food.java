@@ -6,4 +6,6 @@ public abstract class Food extends Item {
 	 public Food(int maturAge, int deathAge, int value) {
 		 super(maturAge, deathAge, value);
 	 }
+
+	public abstract Object copy();
 }

@@ -1,6 +1,8 @@
 package students;
 
+import students.items.Apples;
 import students.items.Food;
+import students.items.Grain;
 import students.items.Item;
 import students.items.Soil; 
 import students.items.Weed;
@@ -101,7 +103,7 @@ public class Field {
 	public int getValue() {
 		int totalValue = 0;
 		for (int row = 0; row < field.length; row++) {
-			for(int column = 0; column < field[row].length; column++) {
+			for (int column = 0; column < field[row].length; column++) {
 				Item fieldItem = field[row][column];
 				if (fieldItem != null) {
 					totalValue += fieldItem.getValue();
@@ -112,7 +114,38 @@ public class Field {
 	}
 
 	public String getSummary() {
-		
+	 int appleCount = 0;
+	 int grainCount = 0;
+	 int soilCount = 0;
+	 int untilledCount = 0;
+	 int weedCount = 0;
+	 int totalValue = 0;
+	 
+	 for (Item[] row : field) {
+		 for (Item item : row) {
+			 if (item != null) {
+				 
+				 if (item instanceof Apples) appleCount++;
+				 else if (item instanceof Grain) grainCount++;
+				 else if (item instanceof Soil) soilCount++;
+				 else if (item instanceof UntilledSoil) untilledCount++;
+				 else if (item instanceof Weed) weedCount++;
+				 
+				 if (item instanceof Food && item.getValue() > 0) {
+					 totalValue += item.getValue();
+				}	
+			}
+		}
 	}
 	
+	return String.format("\nApples:		%-2d"+ appleCount +
+						"\nGrain:			%-2d" + grainCount +
+						"\nSoil:			%-2d" + soilCount +
+						"\nUntilled:		%-2d" + untilledCount +
+						"\nWeed:			%-2d" + weedCount +
+						"\nFor a total of	$%d" + totalValue +
+						"\nTotal apples created: %d" + Apples.getGenerationCount()
+						"\nTotal grain created: %d" + Grain.getGenerationCount());
+	}
+						
 }
