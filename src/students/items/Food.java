@@ -7,5 +7,4 @@ public abstract class Food extends Item {
 		 super(maturAge, deathAge, value);
 	 }
 
-	public abstract Object copy();
 }

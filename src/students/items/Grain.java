@@ -14,10 +14,10 @@ public class Grain extends Food{
 	
 	@Override
 	public String toString() {
-		if (age < maturAge) {
-			return"g";
+		if (age >= maturAge) {
+			return"G";
 		} else {
-			return "G";
+			return "g";
 		}
 	}
 	// gets total number of grain instances	

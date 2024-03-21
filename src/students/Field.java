@@ -80,15 +80,11 @@ public class Field {
 		}
 	}
 	
-	public Object get(int row,  int column) {
+	public Item get(int row, int column) {
 		
 		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
-			Item item = field[row][column];
-			if (item instanceof Food) {
-				return new Food((Food)item).copy();
+			return field[row][column];
 			}
-			return item;
-		}
 		return null;
 	}
 	
@@ -138,14 +134,15 @@ public class Field {
 		}
 	}
 	
-	return String.format("\nApples:		%-2d"+ appleCount +
-						"\nGrain:			%-2d" + grainCount +
-						"\nSoil:			%-2d" + soilCount +
-						"\nUntilled:		%-2d" + untilledCount +
-						"\nWeed:			%-2d" + weedCount +
-						"\nFor a total of	$%d" + totalValue +
-						"\nTotal apples created: %d" + Apples.getGenerationCount()
-						"\nTotal grain created: %d" + Grain.getGenerationCount());
+	return String.format("\nApples"+ appleCount +
+						"\nGrain:" + grainCount +
+						"\nSoil:" + soilCount +
+						"\nUntilled:" + untilledCount +
+						"\nWeed:" + weedCount +
+						"\nFor a total of: " + totalValue +
+						"\nTotal apples created: " + Apples.getGenerationCount() +
+						"\nTotal grain created: " + Grain.getGenerationCount());
+		;
 	}
 						
 }
