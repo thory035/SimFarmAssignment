@@ -11,7 +11,7 @@ public class Field {
 	// array of items to represent the field size
 	public Item[][] field;
 	
-	// initializes array 
+	// initialises array 
 	public Field(int height, int width) {
 		this.field = new Item[height][width];
 		// add new Soil to Field under conditions 
@@ -48,4 +48,26 @@ public class Field {
 				}
 			}
 		}
+	@Override
+	public String toString() {
+		// initialises for alignment
+		String align = " ";
+		for (int header = 1; header <= 10; header++) {
+			
+			align += header + " ";
+			}
+			align += "\n";
+			// loop rows
+			for (int row = 0; row < 10; row++) {
+				// add numbers at start of rows
+				align += (row + 1) + " ";
+				// loop columns
+				for (int column = 0; column < 10; column++) {
+					// append . 
+					align += "." + " ";
+				}
+				align += "\n";
+			}
+			return align;
 	}
+}
