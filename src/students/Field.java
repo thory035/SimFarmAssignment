@@ -1,5 +1,6 @@
 package students;
 
+import students.items.Food;
 import students.items.Item;
 import students.items.Soil; 
 import students.items.Weed;
@@ -70,4 +71,26 @@ public class Field {
 			}
 			return align;
 	}
+	
+	
+	public void till(int row, int column) {
+	
+		if (row >= 0 && row < field.length && column < field[row].length) {
+			field[row][column] = new Soil();
+		}
+	
+	public void get(int row,  int column) {
+		
+		if (row >= 0 && row < field.length && column < field[row].length) {
+			Item item = field[row][column];
+			if (item instanceof Food) {
+				return new Food((Food)item);
+			}
+			return null;
+		}
+	}
+	
+		
+	}
+	
 }
