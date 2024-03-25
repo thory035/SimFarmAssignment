@@ -72,43 +72,51 @@ public class Field {
 			return align;
 	}
 	
-	
+	// tills a location and turns it to Soil
 	public void till(int row, int column) {
-	
+		// if this location is in the Field
 		if (row >= 0 && row < field.length && column < field[row].length) {
+			// add Soil to location
 			field[row][column] = new Soil();
 		}
 	}
-	
+	// get item from a field location
 	public Item get(int row, int column) {
-		
+	
 		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
+			// item is returned to field location
 			return field[row][column];
 			}
 		return null;
 	}
-	
+	// plant at field location
 	public void plant(int row, int column, Item item) {
 		
 		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
+			// at location add item
 			this.field[row][column] = item;
 		}
 		
 	}
-	
+	// calculate total value of all items in the Field
 	public int getValue() {
+		// initialise total value
 		int totalValue = 0;
+		// iterate through each field location
 		for (int row = 0; row < field.length; row++) {
 			for (int column = 0; column < field[row].length; column++) {
+				// get item at field location
 				Item fieldItem = field[row][column];
+				// check if there's an item there
 				if (fieldItem != null) {
+					// add item's value to total
 					totalValue += fieldItem.getValue();
 				}
 			}
 		}
 		return totalValue;
 	}
-
+	// create summary of total value of items on field
 	public String getSummary() {
 	 int appleCount = 0;
 	 int grainCount = 0;
@@ -116,24 +124,25 @@ public class Field {
 	 int untilledCount = 0;
 	 int weedCount = 0;
 	 int totalValue = 0;
-	 
+	 // iterate through items on Field
 	 for (Item[] row : field) {
 		 for (Item item : row) {
 			 if (item != null) {
-				 
+				 // increment based on type
 				 if (item instanceof Apples) appleCount++;
 				 else if (item instanceof Grain) grainCount++;
 				 else if (item instanceof Soil) soilCount++;
 				 else if (item instanceof UntilledSoil) untilledCount++;
 				 else if (item instanceof Weed) weedCount++;
-				 
+				 // if item is an instance 
 				 if (item instanceof Food && item.getValue() > 0) {
+					 // add to total value
 					 totalValue += item.getValue();
 				}	
 			}
 		}
 	}
-	
+	// return summary as a string
 	return String.format("\nApples"+ appleCount +
 						"\nGrain:" + grainCount +
 						"\nSoil:" + soilCount +
@@ -142,7 +151,7 @@ public class Field {
 						"\nFor a total of: " + totalValue +
 						"\nTotal apples created: " + Apples.getGenerationCount() +
 						"\nTotal grain created: " + Grain.getGenerationCount());
-		;
+		
 	}
 						
 }
