@@ -2,10 +2,10 @@ package students.items;
 // no instantiation for Item class
 public abstract class Item {
 		// tracking (start at 0)
-		protected int age = 0;
-		protected int maturAge = 0;
-		protected int deathAge = 0;
-		protected int value = 0; 
+		private int  age = 0;
+		private int maturAge = 0;
+		private int deathAge = 0;
+		private int value = 0; 
 		
 		// constructor
 		public Item(int maturAge, int deathAge, int value) {
