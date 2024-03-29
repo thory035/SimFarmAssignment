@@ -2,6 +2,8 @@ package students;
 
 import java.ulti.Scanner;
 
+import students.items.Item;
+
 public class Farm {
 	
 	// initialise Field 
@@ -15,6 +17,13 @@ public class Farm {
 	{
 		this.field = new Field(fieldHeight, fieldWidth);
 		this.bankBalance = startingFunds;
+	}
+	
+	private void harvest(int x, int y) {
+		Item item = field.get(x, y);
+		
+		// check if food item is mature
+	
 	}
 	// run the farm simulation
 	public void run() {
@@ -38,33 +47,36 @@ public class Farm {
 		String[] cells = input.split(" ");
 		int x, y;
 		
-		
 		// actions - try, switch, case for options
 		try {
-			switch ([0]) {
+			switch (cells[0]) {
 				// till
 				case "t":
-				x = ;
-				y = ;
-
+					// convert str into int and correctly access the right element by -1
+					// correctly map zero-based indexing system
+					x = Integer.parseInt(cells[1]) - 1;
+					y = Integer.parseInt(cells[2]) - 1;
+					// till this location
+					field.till(x, y);
 					break;
 				// harvest
-				case "h"
-				x = ;
-				y = ;
+				case "h":
+					x = Integer.parseInt(cells[1]) - 1;
+					y = Integer.parseInt(cells[2]) - 1;
+					field.harvest(x, y);
 					break;
 				
 				// plant
-				case "p"
+				case "p":
 					break;
 					
 				// summary
-				case "w"
+				case "w":
 					System.out.println(field.getSummary());
 					break;
 				
 				// wait
-				case "w"
+				case "w":
 					break;
 				
 				default:
