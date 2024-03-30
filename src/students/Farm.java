@@ -2,6 +2,8 @@ package students;
 
 import java.util.Scanner;
 
+import students.items.Apples;
+import students.items.Grain;
 import students.items.Item;
 import students.items.Soil;
 import students.Field;
@@ -86,9 +88,41 @@ public class Farm {
 						// plant
 					case "p":
 						x = Integer.parseInt(cells[1]) - 1;
-						y = Integer.parseInt(cells[2]) - 1;
-						field.plant(x, y);
-						break;
+						y = Integer.parseInt(cells[2]) - 1;					
+						Item isSoil = field.get(x, y);
+						// checking soil instance
+						if (isSoil instanceof Soil) {
+							System.out.print("Enter\n"
+									+ "- 'a' to buy an apple for $" + Apples.cost + "\n"
+									+ "- 'g' to buy grain for $" + Grain.cost);
+							// listens for next line of string
+							String option = scanner.nextLine();
+							
+							switch(option) {
+							case "a":
+								if(bankBalance >= Apples.cost) {
+									field.plant(x, y, new Apples());
+									bankBalance -= Apples.cost;
+									System.out.println("Apple has been planted");
+								} else {
+									System.out.println("Not enough funds.");
+								}
+								break;
+								
+							case "b":
+								if(bankBalance >= Grain.cost) {
+									field.plant(x, y, new Grain());
+									bankBalance -= Grain.cost;
+									System.out.println("Grain has been planted");
+								} else {
+									System.out.println("Not enough funds.");
+								}
+								break;
+							default:
+								System.out.println("Invalid");
+								
+							}
+						}
 					
 						// summary
 					case "s":

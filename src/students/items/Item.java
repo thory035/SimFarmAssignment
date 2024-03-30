@@ -1,11 +1,11 @@
 package students.items;
 // no instantiation for Item class
-public abstract class Item {
+public abstract class Item implements Cloneable {
 		// tracking (start at 0)
-		private int  age = 0;
-		private int maturAge = 0;
-		private int deathAge = 0;
-		private int value = 0; 
+		public int  age = 0;
+		public int maturAge = 0;
+		public int deathAge = 0;
+		public int value = 0; 
 		
 		// constructor
 		public Item(int maturAge, int deathAge, int value) {
@@ -19,6 +19,16 @@ public abstract class Item {
 		age++; 
 		}
 	
+		public Item clone() {
+			try {
+				Item cloned = (Item) super.clone();
+				cloned.age = 0;
+				return cloned;
+			} catch (CloneNotSupportedException e) {
+				throw new RuntimeException("Clone not supported", e);
+			}
+		}
+		
 		public int getAge() {
 		return age;
 		}
