@@ -90,6 +90,22 @@ public class Field {
 			field[row][column] = new Soil();
 		}
 	}
+	
+	
+	public void pull(int row, int column) {
+		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
+				// check if item is weed
+				if (field[row][column] instanceof Weed) {
+					// replace weed with untilledsoil 
+					field[row][column] = new UntilledSoil();
+					System.out.println("Weed has been removed!");
+				} else {
+					System.out.println("Weed cannot be pulled from location.");
+				}
+			} else {
+				System.out.println("Location is outside of field dimensions.");
+			}
+		}
 	// get item copy from field location
 	public Item get(int row, int column) {
 		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {

@@ -53,6 +53,7 @@ public class Farm {
 					+ "t x y: till\n"
 					+ "h x y: harvest\n"
 					+ "p x y: plant\n"
+					+ "pw x y: pull weed\n"
 					+ "s: field summary\n"
 					+ "w: wait\n"
 					+ "q: quit");
@@ -70,8 +71,7 @@ public class Farm {
 					case "s":
 						System.out.println(field.getSummary());
 						break;
-				
-						// wait
+					// wait
 					case "w":
 						toWait();
 						break;
@@ -84,15 +84,20 @@ public class Farm {
 						// till this location
 						field.till(x, y); 
 						break;
-						
-						// harvest
+					// pull weed
+					case "pw":
+						x = Integer.parseInt(cells[1]) - 1;
+						y = Integer.parseInt(cells[2]) - 1;
+						field.pull(x, y);
+						break;
+					// harvest
 					case "h":
 						x = Integer.parseInt(cells[1]) - 1;
 						y = Integer.parseInt(cells[2]) - 1;
 						harvest(x, y);
 						break;
 				
-						// plant
+					// plant
 					case "p":
 						x = Integer.parseInt(cells[1]) - 1;
 						y = Integer.parseInt(cells[2]) - 1;					
@@ -127,9 +132,6 @@ public class Farm {
 								} else {
 									System.out.println("Sorry, not enough funds :(\n");
 								}
-								break;
-							default:
-								System.out.println("Invalid.\n");
 								break;
 							}
 						}
