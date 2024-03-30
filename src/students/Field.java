@@ -68,15 +68,19 @@ public class Field {
 			// loop rows
 			for (int row = 0; row < field.length; row++) {
 				// adjust space between numbers
-				align.append(row + 1).append(row + 1 > 9 ? " " : " ");
-				for (int column = 0; column < field[row]. length; column++) {
-					align.append(".  ");
+				align.append(row + 1).append(row + 1 > 9 ? "" : " ");
+				for (int column = 0; column < field[row].length; column++) {
+					if (field[row][column] instanceof Soil) {
+						align.append(".  ");
+					} else if (field[row][column] != null) {
+						align.append(field[row][column].toString()).append(" ");
+					} else {
+						align.append(".  ");
+					}
 				}
 				align.append("\n");
 			}
 			return align.toString();
-			
-
 	}
 	// tills location and turns it to Soil
 	public void till(int row, int column) {
@@ -88,8 +92,6 @@ public class Field {
 	}
 	// get item copy from field location
 	public Item get(int row, int column) {
-		
-	
 		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
 			// item is returned to field location
 			Item item = field[row][column];
@@ -161,6 +163,7 @@ public class Field {
 						"\nWeed:" + weedCount +
 						"\nFor a total of: " + totalValue +
 						"\nTotal apples created: " + Apples.getGenerationCount() +
-						"\nTotal grain created: " + Grain.getGenerationCount());
+						"\nTotal grain created: " + Grain.getGenerationCount() 
+						+ "\n");
 	}		
 }

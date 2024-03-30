@@ -109,7 +109,7 @@ public class Farm {
 								}
 								break;
 								
-							case "b":
+							case "g":
 								if(bankBalance >= Grain.cost) {
 									field.plant(x, y, new Grain());
 									bankBalance -= Grain.cost;
