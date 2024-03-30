@@ -21,10 +21,8 @@ public abstract class Item implements Cloneable {
 	
 		public Item clone() {
 			try {
-				Item cloned = (Item) super.clone();
-				cloned.age = 0;
-				return cloned;
-			} catch (CloneNotSupportedException e) {
+				return (Item) super.clone();
+				} catch (CloneNotSupportedException e) {
 				throw new RuntimeException("Clone not supported", e);
 			}
 		}

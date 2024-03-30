@@ -70,7 +70,7 @@ public class Field {
 				// adjust space between numbers
 				align.append(row + 1).append(row + 1 > 9 ? " " : " ");
 				for (int column = 0; column < field[row]. length; column++) {
-					align.append(". ");
+					align.append(".  ");
 				}
 				align.append("\n");
 			}
@@ -88,11 +88,13 @@ public class Field {
 	}
 	// get item copy from field location
 	public Item get(int row, int column) {
+		
 	
 		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
 			// item is returned to field location
 			Item item = field[row][column];
 			if (item != null) {
+
 				// clone item before returning it
 				return item.clone();
 			}

@@ -137,14 +137,13 @@ public class Farm {
 					default:
 						System.out.println("Error. Try again.");
 						break;
-				
 				}
 			} catch (Exception e) {
 				System.out.print("Invalid cell location");
 			}
 			
-			}
 		}
-		
 	}
+		
+}
 	

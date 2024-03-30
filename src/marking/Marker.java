@@ -68,5 +68,24 @@ public class Marker {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	// should print 0
+	// should print 1
+	// should print "a"
+	// should print 0
+	// should print 3
+	// should print "A"
+	// should print false
+	// should print true
+	// this should be possible
+	// this should be possible
+	// should print "#"
+	// should print "/"
+	
+	//should print "." System.out.println(testField); //should print the field
+	//should print 0 a = new Apples();
+	//should print 3
+	//should print true
+	//should print false System.out.println(testField.get(0, 0).equals(new
+	//should print true
 }
