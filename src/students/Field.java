@@ -72,7 +72,7 @@ public class Field {
 			return align;
 	}
 	
-	// tills a location and turns it to Soil
+	// tills location and turns it to Soil
 	public void till(int row, int column) {
 		// if this location is in the Field
 		if (row >= 0 && row < field.length && column < field[row].length) {
@@ -80,13 +80,17 @@ public class Field {
 			field[row][column] = new Soil();
 		}
 	}
-	// get item from a field location
+	// get item copy from field location
 	public Item get(int row, int column) {
 	
 		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
 			// item is returned to field location
-			return field[row][column];
+			Item item = field[row][column];
+			if (item != null) {
+				// clone item before returning it
+				return item.clone();
 			}
+		}
 		return null;
 	}
 	// plant at field location
