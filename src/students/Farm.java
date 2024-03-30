@@ -67,6 +67,14 @@ public class Farm {
 			// actions - try, switch, case for options
 			try {
 				switch (cells[0]) {
+					case "s":
+						System.out.println(field.getSummary());
+						break;
+				
+						// wait
+					case "w":
+						toWait();
+						break;
 					// till
 					case "t":
 						// convert str into int and correctly access the right element by -1
@@ -76,6 +84,7 @@ public class Farm {
 						// till this location
 						field.till(x, y); 
 						break;
+						
 						// harvest
 					case "h":
 						x = Integer.parseInt(cells[1]) - 1;
@@ -87,25 +96,26 @@ public class Farm {
 					case "p":
 						x = Integer.parseInt(cells[1]) - 1;
 						y = Integer.parseInt(cells[2]) - 1;					
-						Item isSoil = field.get(x, y);
-						// checking soil instance
-						if (isSoil instanceof Soil) {
-							System.out.print("Enter\n"
-									+ "- 'a' to buy an apple for $" + Apples.cost + "\n"
-									+ "- 'g' to buy grain for $" + Grain.cost + "\n");
-							// listens for next line of string
-							String option = scanner.nextLine();
-							
-							switch(option) {
-							case "a":
-								if(bankBalance >= Apples.cost) {
-									field.plant(x, y, new Apples());
-									bankBalance -= Apples.cost;
-									System.out.println("Apple has been planted!\n");
-									break;
-								} else {
-									System.out.println("Sorry, not enough funds :(\n");
-								}
+					
+							Item isSoil = field.get(x, y);
+							// checking soil instance
+							if (isSoil instanceof Soil) {
+								System.out.print("Enter\n"
+										+ "- 'a' to buy an apple for $" + Apples.cost + "\n"
+										+ "- 'g' to buy grain for $" + Grain.cost + "\n");
+								// listens for next line of string
+								String option = scanner.nextLine();
+								
+								switch(option) {
+								case "a":
+									if(bankBalance >= Apples.cost) {
+										field.plant(x, y, new Apples());
+										bankBalance -= Apples.cost;
+										System.out.println("Apple has been planted!\n");
+										break;
+									} else {
+										System.out.println("Sorry, not enough funds :(\n");
+									}
 								break;
 								
 							case "g":
@@ -123,19 +133,6 @@ public class Farm {
 								break;
 							}
 						}
-						// summary
-					case "s":
-						System.out.println(field.getSummary());
-						break;
-				
-						// wait
-					case "w":
-						toWait();
-						break;
-				
-					default:
-						System.out.println("Error. Try again.\n");
-						break;
 				}
 			} catch (Exception e) {
 				System.out.print("Invalid cell location.\n");

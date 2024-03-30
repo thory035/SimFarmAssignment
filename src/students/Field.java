@@ -110,7 +110,7 @@ public class Field {
 		}
 			// if dimensions are true, plant item
 			this.field[row][column] = item;
-		}	
+			}
 	// calculate total value of all items in the Field
 	public int getValue() {
 		// initialise total value
