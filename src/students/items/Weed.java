@@ -9,6 +9,6 @@ public class Weed extends Item {
 	
 	@Override
 	public String toString() {
-		return "#";
+		return "# ";
 	}
 }

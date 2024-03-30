@@ -103,19 +103,14 @@ public class Field {
 		return null;
 	}
 	// plant at field location
-	public void plant(int row, int column, Item item) {
-		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
-			// at location add item
-			this.field[row][column] = item;
-			
-			if (item instanceof Apples) {
-				Apples.generationCount++;
-			} else if (item instanceof Grain) {
-				Grain.generationCount++;
-			}
+	public void plant(int row, int column, Item item) throws IllegalArgumentException {
+		// check if location is inside field
+		if (row < 0 || row >= field.length || column < 0 || column >= field[row].length) {
+			throw new IllegalArgumentException("Can only plant wirhin field dimensions");
 		}
-	}
-	
+			// if dimensions are true, plant item
+			this.field[row][column] = item;
+		}	
 	// calculate total value of all items in the Field
 	public int getValue() {
 		// initialise total value
@@ -161,12 +156,12 @@ public class Field {
 		}
 	}
 	// return summary as a string
-	return String.format("\nApples: "+ appleCount +
+	return String.format("Apples: "+ appleCount +
 						"\nGrain: " + grainCount +
 						"\nSoil: " + soilCount +
 						"\nUntilled: " + untilledCount +
 						"\nWeed: " + weedCount +
-						"\nFor a total of: " + totalValue +
+						"\nFor a total of $: " + totalValue +
 						"\nTotal apples created: " + Apples.getGenerationCount() +
 						"\nTotal grain created: " + Grain.getGenerationCount() 
 						+ "\n");

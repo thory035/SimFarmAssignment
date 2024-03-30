@@ -21,9 +21,9 @@ public class Apples extends Food implements Cloneable {
 	@Override
 	public String toString() {
 		if (age >= maturAge) {
-			return"A";
+			return"A ";
 		} else {
-			return "a";
+			return "a ";
 		}
 	}
 	// gets total number of apple instances	

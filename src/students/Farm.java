@@ -32,18 +32,16 @@ public class Farm {
 			bankBalance += item.getValue();
 			//adds Soil item to this cell
 			field.plant(x, y, new Soil());
-			System.out.println("Item has been harvested!");
+			System.out.println("Item has been harvested!\n");
 		} else {
-			System.out.println("Cannot be harvested.");
+			System.out.println("Cannot be harvested.\n");
 		}
 	}
 	
 	public void toWait() {
 		 field.tick();
-		 System.out.println("And so you wait...");
+		 System.out.println("And so you wait...\n");
 	}
-	
-	
 	// run the farm simulation
 	public void run() {
 		while(true) {
@@ -103,10 +101,10 @@ public class Farm {
 								if(bankBalance >= Apples.cost) {
 									field.plant(x, y, new Apples());
 									bankBalance -= Apples.cost;
-									System.out.println("Apple has been planted");
+									System.out.println("Apple has been planted!\n");
 									break;
 								} else {
-									System.out.println("Not enough funds.");
+									System.out.println("Sorry, not enough funds :(\n");
 								}
 								break;
 								
@@ -114,17 +112,17 @@ public class Farm {
 								if(bankBalance >= Grain.cost) {
 									field.plant(x, y, new Grain());
 									bankBalance -= Grain.cost;
-									System.out.println("Grain has been planted!");
+									System.out.println("Grain has been planted!\n");
 									break;
 								} else {
-									System.out.println("Not enough funds.");
+									System.out.println("Sorry, not enough funds :(\n");
 								}
 								break;
 							default:
-								System.out.println("Invalid");
+								System.out.println("Invalid.\n");
+								break;
 							}
 						}
-					
 						// summary
 					case "s":
 						System.out.println(field.getSummary());
@@ -136,11 +134,11 @@ public class Farm {
 						break;
 				
 					default:
-						System.out.println("Error. Try again.");
+						System.out.println("Error. Try again.\n");
 						break;
 				}
 			} catch (Exception e) {
-				System.out.print("Invalid cell location");
+				System.out.print("Invalid cell location.\n");
 			}
 			
 		}

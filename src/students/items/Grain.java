@@ -21,9 +21,9 @@ public class Grain extends Food implements Cloneable{
 	@Override
 	public String toString() {
 		if (age >= maturAge) {
-			return"G";
+			return"G ";
 		} else {
-			return "g";
+			return "g ";
 		}
 	}
 	// gets total number of grain instances	

@@ -9,6 +9,6 @@ public class UntilledSoil extends Item {
 	
 	@Override
 	public String toString() {
-		return "/";
+		return "/ ";
 	}
 }
