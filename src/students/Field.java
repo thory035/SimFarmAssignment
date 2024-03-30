@@ -14,6 +14,13 @@ public class Field {
 	
 	// initialises array 
 	public Field(int height, int width) {
+		
+		if (height > 10) {
+			height = 10;
+		}
+		if (width > 10) {
+			width = 10;
+		}
 		this.field = new Item[height][width];
 		// add new Soil to Field under conditions 
 		for (int row = 0; row < height; row++) {
@@ -51,27 +58,26 @@ public class Field {
 		}
 	@Override
 	public String toString() {
-		// initialises for alignment
-		String align = " ";
-		for (int header = 1; header <= 10; header++) {
+		// initialises for alignment	
+			StringBuilder align = new StringBuilder (" ");
+			for (int header = 1; header <= field[0].length; header++) {
+				align.append(header > 9 ? header: " " + header).append(" ");
+			}
+			align.append("\n");
 			
-			align += header + " ";
-			}
-			align += "\n";
 			// loop rows
-			for (int row = 0; row < 10; row++) {
-				// add numbers at start of rows
-				align += (row + 1) + " ";
-				// loop columns
-				for (int column = 0; column < 10; column++) {
-					// append . 
-					align += "." + " ";
+			for (int row = 0; row < field.length; row++) {
+				// adjust space between numbers
+				align.append(row + 1).append(row + 1 > 9 ? " " : " ");
+				for (int column = 0; column < field[row]. length; column++) {
+					align.append(". ");
 				}
-				align += "\n";
+				align.append("\n");
 			}
-			return align;
+			return align.toString();
+			
+
 	}
-	
 	// tills location and turns it to Soil
 	public void till(int row, int column) {
 		// if this location is in the Field
@@ -100,7 +106,6 @@ public class Field {
 			// at location add item
 			this.field[row][column] = item;
 		}
-		
 	}
 	// calculate total value of all items in the Field
 	public int getValue() {
@@ -155,7 +160,5 @@ public class Field {
 						"\nFor a total of: " + totalValue +
 						"\nTotal apples created: " + Apples.getGenerationCount() +
 						"\nTotal grain created: " + Grain.getGenerationCount());
-		
-	}
-						
+	}		
 }

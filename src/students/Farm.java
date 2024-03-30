@@ -94,7 +94,7 @@ public class Farm {
 						if (isSoil instanceof Soil) {
 							System.out.print("Enter\n"
 									+ "- 'a' to buy an apple for $" + Apples.cost + "\n"
-									+ "- 'g' to buy grain for $" + Grain.cost);
+									+ "- 'g' to buy grain for $" + Grain.cost + "\n");
 							// listens for next line of string
 							String option = scanner.nextLine();
 							
@@ -142,14 +142,9 @@ public class Farm {
 			} catch (Exception e) {
 				System.out.print("Invalid cell location");
 			}
-		
 			
+			}
 		}
-	}
 		
-		public static void main(String[] args) {
-			Farm farm = new Farm(10, 10, 10);
-			farm.run();
-		}
 	}
 	
