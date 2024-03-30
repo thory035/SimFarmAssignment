@@ -104,6 +104,7 @@ public class Farm {
 									field.plant(x, y, new Apples());
 									bankBalance -= Apples.cost;
 									System.out.println("Apple has been planted");
+									break;
 								} else {
 									System.out.println("Not enough funds.");
 								}
@@ -113,14 +114,14 @@ public class Farm {
 								if(bankBalance >= Grain.cost) {
 									field.plant(x, y, new Grain());
 									bankBalance -= Grain.cost;
-									System.out.println("Grain has been planted");
+									System.out.println("Grain has been planted!");
+									break;
 								} else {
 									System.out.println("Not enough funds.");
 								}
 								break;
 							default:
 								System.out.println("Invalid");
-								
 							}
 						}
 					
