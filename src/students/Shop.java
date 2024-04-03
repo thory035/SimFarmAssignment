@@ -6,30 +6,22 @@
 
 package students;
 
+import students.items.Item;
 import students.tools.Tool;
 
 public class Shop {
 	
-	private Farm farm;
+	public Farm farm;
 	
 	public Shop(Farm farm) {
-		
-		// initialiser
 		this.farm = farm;
 	}
 	
-	public void buyWeedKiller(Field field, int x, int y, int[] bankBalance) {
-		int value = 50;
-		if (farm.getBankBalance() <= value) {
-			farm.setBankBalanance(farm.getBankBalance() - value);
-			applyWeedKiller(field, x, y);
-			bankBalance[0]-= value;
-			System.out.println("You applied weed killer. "
-					+ "It was super effective!");
-		} else {
-			System.out.println("Insufficient funds :(");
+	public boolean buyItem(Item item) {
+		if (farm.getBankBalance() >= item.getValue()) {
+			farm.setBankBalanance(farm.getBankBalance() - item.getValue());
+			System.out.println(item.getClass().toolName() + "purchased for $" + item.getValue());
 		}
-		
 	}
 	
 	

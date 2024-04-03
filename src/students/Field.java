@@ -11,6 +11,7 @@ import students.items.UntilledSoil;
 public class Field {
 	// array of items to represent the field size
 	public Item[][] field;
+	public int length;
 	
 	// initialises array 
 	public Field(int height, int width) {

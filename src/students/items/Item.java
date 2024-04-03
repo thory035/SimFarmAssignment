@@ -52,14 +52,13 @@ public abstract class Item implements Cloneable {
 				return 0;
 			}
 		}
-
+		// adjusted original equals() to recognise tool as an object
 		public boolean equals(Object obj) {
-			if (this == obj) {
+			if (this == obj)
 				return true;
-			}
-			if (obj == null || getClass() != obj.getClass()) {
-				return false;
-			}
+				if(!(obj instanceof Item))
+					return false;
+
 			Item items = (Item) obj;
 			
 			return (this.age == items.age)
