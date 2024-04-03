@@ -119,7 +119,7 @@ public class Field {
 		return null;
 	}
 	// plant at field location
-	public void plant(int row, int column, Item item) throws IllegalArgumentException {
+	public void plant(int row, int column, Item item) {
 		// check if location is inside field
 		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
 			// if dimensions are true, plant item

@@ -12,15 +12,28 @@ public class Farm {
 	
 	// initialise Field 
 	private Field field;
-	// balance
 	private int bankBalance;
-	Scanner scanner = new Scanner(System.in);
+	private Scanner scanner; 
+	// initialise shop
+	private Shop shop;
 	
 	// initialise farm with appropriate size and player money
 	public Farm(int fieldWidth, int fieldHeight, int startingFunds)
 	{
 		this.field = new Field(fieldHeight, fieldWidth);
 		this.bankBalance = startingFunds;
+		this.scanner = new Scanner(System.in);
+		this.shop = new Shop(this);
+	}
+	
+	// getter created for the new Shop class to access
+	public int getBankBalance() {
+		return bankBalance;
+	}
+	
+	// setter created for the new Shop class to access
+	public void setBankBalanance(int bankBalance) {
+		this.bankBalance = bankBalance;
 	}
 	
 	public void harvest(int x, int y) {

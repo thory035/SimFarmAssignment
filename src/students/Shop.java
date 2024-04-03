@@ -6,6 +6,8 @@
 
 package students;
 
+import students.tools.Tool;
+
 public class Shop {
 	
 	private Farm farm;
