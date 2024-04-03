@@ -42,111 +42,151 @@ public class Farm {
 		 field.tick();
 		 System.out.println("And so you wait...\n");
 	}
-	// run the farm simulation
-	public void run() {
-		System.out.println("Give your farm a name:");
-		String farmName = scanner.nextLine();
-		System.out.print("Welcome to " + farmName + " Farm!\n");
-		while(true) {
-		
-			// display field
-			System.out.println("\n" + field);
-			System.out.println("---------------------\n"
-					+ "| Bank balance: $" + bankBalance + " |" 
-					+ "\n---------------------\n"
-					+ "Enter your next action: \n"
-					+ "t x y: till\n"
-					+ "h x y: harvest\n"
-					+ "p x y: plant\n"
-					+ "pw x y: pull weed\n"
-					+ "s: field summary\n"
-					+ "w: wait\n"
-					+ "q: quit");
-		
+	
+	public void farmingOptions() {
+		while (true) {
+			System.out.println("\n Enter action then"
+					+ "\n enter the location on field."
+					+ "\n eg. p 1(row) 2(column)\n"
+					+ "Farm\n"
+					+ "| []t x y: till\n"
+					+ "| [h ] harvest\n"
+					+ "| [p ] plant\n"
+					+ "| [pw] pull weed\n"
+					+ "| [fs] field summary\n"
+					+ "| [b ] Return to main menu");
+			
 			String input = scanner.nextLine();
-			if ("q".equals(input)) break; 
-		
-			//separate inputs as individual items(coordinates) when spaces exist
-			String[] cells = input.split(" ");
+			String[] cells = input.split("");
 			int x, y;
-		
-			// actions - try, switch, case for options
-			try {
-				switch (cells[0]) {
-					case "s":
-						System.out.println(field.getSummary());
-						break;
-					// wait
-					case "w":
-						toWait();
-						break;
-					// till
-					case "t":
-						// convert str into int and correctly access the right element by -1
-						// correctly map zero-based indexing system
-						x = Integer.parseInt(cells[1]) - 1;
-						y = Integer.parseInt(cells[2]) - 1;
-						// till this location
-						field.till(x, y); 
-						break;
+			
+			switch (cells[0]) {
+				// till untilled soil
+				case "t":
+					// convert str into int and correctly access the right element by -1
+					// correctly map zero-based indexing system
+					x = Integer.parseInt(cells[1]) - 1;
+					y = Integer.parseInt(cells[2]) - 1;
+					// till this location
+					field.till(x, y); 
+					break;
+				//harvest
+				case "h":
+					x = Integer.parseInt(cells[1]) - 1;
+					y = Integer.parseInt(cells[2]) - 1;
+					harvest(x, y);
+					break;
+					 //wait
+				case "w":
+					toWait();
+					break;
 					// pull weed
-					case "pw":
-						x = Integer.parseInt(cells[1]) - 1;
-						y = Integer.parseInt(cells[2]) - 1;
+				case "pw":
+					x = Integer.parseInt(cells[1]) - 1;
+					y = Integer.parseInt(cells[2]) - 1;
 						field.pull(x, y);
-						break;
-					// harvest
-					case "h":
-						x = Integer.parseInt(cells[1]) - 1;
-						y = Integer.parseInt(cells[2]) - 1;
-						harvest(x, y);
-						break;
+					break;
+				//plant
+				case "p":
+					x = Integer.parseInt(cells[1]) - 1;
+					y = Integer.parseInt(cells[2]) - 1;					
 				
-					// plant
-					case "p":
-						x = Integer.parseInt(cells[1]) - 1;
-						y = Integer.parseInt(cells[2]) - 1;					
-					
-							Item isSoil = field.get(x, y);
-							// checking soil instance
-							if (isSoil instanceof Soil) {
-								System.out.print("Enter\n"
-										+ "- 'a' to buy an apple for $" + Apples.cost + "\n"
-										+ "- 'g' to buy grain for $" + Grain.cost + "\n");
-								// listens for next line of string
-								String option = scanner.nextLine();
-								
-								switch(option) {
-								case "a":
-									if(bankBalance >= Apples.cost) {
-										field.plant(x, y, new Apples());
-										bankBalance -= Apples.cost;
-										System.out.println("Apple has been planted!\n");
-										break;
-									} else {
-										System.out.println("Sorry, not enough funds :(\n");
-									}
-								break;
-								
-							case "g":
-								if(bankBalance >= Grain.cost) {
-									field.plant(x, y, new Grain());
-									bankBalance -= Grain.cost;
-									System.out.println("Grain has been planted!\n");
+						Item isSoil = field.get(x, y);
+						// checking soil instance
+						if (isSoil instanceof Soil) {
+							System.out.print("Enter\n"
+									+ "- 'a' to buy an apple for $" + Apples.cost + "\n"
+									+ "- 'g' to buy grain for $" + Grain.cost + "\n");
+							// listens for next line of string
+							String option = scanner.nextLine();
+							
+							switch(option) {
+							//plant apple
+							case "a":
+								if(bankBalance >= Apples.cost) {
+									field.plant(x, y, new Apples());
+									bankBalance -= Apples.cost;
+									System.out.println("Apple has been planted!\n");
 									break;
 								} else {
 									System.out.println("Sorry, not enough funds :(\n");
 								}
+							break;
+						// plant grain
+						case "g":
+							if(bankBalance >= Grain.cost) {
+								field.plant(x, y, new Grain());
+								bankBalance -= Grain.cost;
+								System.out.println("Grain has been planted!\n");
 								break;
+							} else {
+								System.out.println("Sorry, not enough funds :(\n");
+							}
+							break;
 							}
 						}
+					}
+				}
+			}
+	// run the farm simulation
+	public void run() {
+		System.out.println("Congratulations!\n"
+				+ "You've inherited your\n"
+				+ "grandfather's farm.\n"
+				+ "\nGive your farm a name:");
+		
+		String farmName = scanner.nextLine();
+		
+		System.out.print(farmName + ", what a wonderful\n"
+				+ "name!\n");
+		
+		while(true) {
+		
+			// display field
+			System.out.println("\n--------------------------------\n"
+					+ "| " + farmName + " Farm"
+					+ "\n--------------------------------\n"
+					+ "\n" + field
+					+"\n--------------------------------\n"
+					+ "| Bank balance: $" + bankBalance
+					+ "\n--------------------------------\n"
+					+ "\nEnter action [...]\n"
+
+					+ "\n--> [f ] Farm"
+					+ "\n--> [s ] Shop "
+					+ "\n--> [r ] Rest "
+					+ "\n--> [fs] Field Summary"
+					+ "\n--> [q ] Quit");
+		
+			String input = scanner.nextLine();
+			String[] cells = input.split(" ");
+			if ("q".equals(input)) break; 
+
+			// actions - try, switch, case for options
+			try {
+				switch (cells[0]) {
+					case "f":
+						farmingOptions();
+						break;
+					case "fs":
+						System.out.println(field.getSummary());
+					case "s":
+						enterShop();
+						break;
+					case "r":
+						rest();
+						break;
+					case "q":
+						System.out.println("Quiting...");
+						return;
+					default:
+						System.out.println("Invalid action. Please try again.\n");		
 				}
 			} catch (Exception e) {
-				System.out.print("Invalid cell location.\n");
+				System.out.print("Error occured. Please try again.");
 			}
 			
 		}
 	}
-		
 }
 	
