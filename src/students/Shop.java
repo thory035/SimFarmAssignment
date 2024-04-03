@@ -1,25 +1,45 @@
+/*
+ * Encapsulated bankBalance in Farm
+ * to allow the access and modification 
+ * from Shop class
+ * */
+
 package students;
 
 public class Shop {
-
-	// constructor
 	
-	public enterShop() {
+	private Farm farm;
+	
+	public Shop(Farm farm) {
 		
-		// constructor??
+		// initialiser
+		this.farm = farm;
+	}
+	
+	public void buyWeedKiller(Field field, int x, int y, int[] bankBalance) {
+		int value = 50;
+		if (farm.getBankBalance() <= value) {
+			farm.setBankBalanance(farm.getBankBalance() - value);
+			applyWeedKiller(field, x, y);
+			bankBalance[0]-= value;
+			System.out.println("You applied weed killer. "
+					+ "It was super effective!");
+		} else {
+			System.out.println("Insufficient funds :(");
+		}
 		
 	}
 	
-	public void buyWeedKiller() {
-		
-	}
 	
 	private void applyWeedKiller() {
 		
 	}
 	
 	public void buyHoe() {
-		
+		int value = 20;
+		if (farm.getBankBalance() <= value) {
+			farm.setBankBalanance(farm.getBankBalance() - value ;
+		}
 	}
 	
 	private void applyHoe() {
@@ -27,7 +47,7 @@ public class Shop {
 	}
 	
 	public void buyPlantingGloves() {
-		
+		int cost = 10;
 	}
 	
 	private void applyPlantingGloves() {
@@ -35,7 +55,7 @@ public class Shop {
 	}
 	
 	public void buyBasket() {
-		
+		int cost = 15;
 	}
 	
 	public void applyBasket() {
