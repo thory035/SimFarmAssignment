@@ -98,7 +98,7 @@ public class Field {
 				if (field[row][column] instanceof Weed) {
 					// replace weed with untilledsoil 
 					field[row][column] = new UntilledSoil();
-					System.out.println("Weed has been removed!");
+					System.out.println("Weed has been removed!\n");
 				} else {
 					System.out.println("Weed cannot be pulled from location.");
 				}
@@ -121,11 +121,10 @@ public class Field {
 	// plant at field location
 	public void plant(int row, int column, Item item) throws IllegalArgumentException {
 		// check if location is inside field
-		if (row < 0 || row >= field.length || column < 0 || column >= field[row].length) {
-			throw new IllegalArgumentException("Can only plant wirhin field dimensions");
-		}
+		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
 			// if dimensions are true, plant item
 			this.field[row][column] = item;
+		}
 			}
 	// calculate total value of all items in the Field
 	public int getValue() {

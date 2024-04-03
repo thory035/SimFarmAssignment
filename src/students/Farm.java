@@ -44,12 +44,17 @@ public class Farm {
 	}
 	// run the farm simulation
 	public void run() {
+		System.out.println("Give your farm a name:");
+		String farmName = scanner.nextLine();
+		System.out.print("Welcome to " + farmName + " Farm!\n");
 		while(true) {
 		
 			// display field
-			System.out.println(field);
-			System.out.println("Bank balance: $" + bankBalance);
-			System.out.println("Enter your next action: \n"
+			System.out.println("\n" + field);
+			System.out.println("---------------------\n"
+					+ "| Bank balance: $" + bankBalance + " |" 
+					+ "\n---------------------\n"
+					+ "Enter your next action: \n"
 					+ "t x y: till\n"
 					+ "h x y: harvest\n"
 					+ "p x y: plant\n"
