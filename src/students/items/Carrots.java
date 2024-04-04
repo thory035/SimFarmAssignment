@@ -3,7 +3,7 @@ package students.items;
 public class Carrots extends Food implements Cloneable {
 	// counter to track Apple instances
 	public static int generationCount = 0;
-	public static int cost = 2;
+	public static int cost = 1;
 	
 	// superclass constructor
 	public Carrots() {

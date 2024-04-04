@@ -5,7 +5,7 @@ import students.items.Item;
 import students.items.UntilledSoil;
 import students.items.Weed;
 
-public class WeedKiller extends Tool {
+public abstract class WeedKiller extends Tool {
 	public static int cost = 10;
 
 	public Field field;
@@ -16,8 +16,4 @@ public class WeedKiller extends Tool {
 		this.field = field;
 	}
 
-	@Override
-	public String toString() {
-		return "#@ ";
-	}
 }

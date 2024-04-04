@@ -15,7 +15,6 @@ public class Farm {
 	private Field field;
 	private int bankBalance;
 	private int totalProfit = 0;
-	private int totalLoss = 0;
 	private boolean hasWeedKiller = false;
 	private boolean hasCarrots = false;
 
@@ -38,8 +37,10 @@ public class Farm {
 	// kills weeds in a 3x3
 	public void applyWeedKiller(int x, int y) {
 		field.applyWeedKiller(x, y);
-		System.out.println("Weeds Killer was applied!\n"
-				+ "It's super effective!\n");
+		System.out.println("|----------------------|\n"
+				+ "Weeds Killer was applied!\n"
+				+ "It's super effective!\n"
+				+ "|----------------------|\n");
 	}
 	
 	// farming
@@ -52,7 +53,9 @@ public class Farm {
 			bankBalance += item.getValue();
 			//adds Soil item to this cell
 			field.plant(x, y, new Soil());
-			System.out.println("Item has been harvested!\n");
+			System.out.println("|----------------------|\n"
+					+ "Item has been harvested\n!"
+					+ "|----------------------|\n");
 		} else {
 			System.out.println("Cannot be harvested.\n");
 		}
@@ -60,18 +63,26 @@ public class Farm {
 	// 1 tick passes
 	public void toWait() {
 		 field.tick();
-		 System.out.println("And so you wait...\n");
+		 // %80 chance occurrence
+		 field.checkRabbitRaid();
+		 System.out.println("|----------------------|\n"
+		 		+ "And so you wait...\n"
+		 		+ "|----------------------|\n");
 	}
 	
 	public void shopOptions() {
 		while (true) {
-			System.out.println("\n--------------------------------\n"
-					+ "Shoping"
+			System.out.println("\n_________________________________\n"
+					+ "| Bank balance: $" + bankBalance+ "\n"
+					+ "________________________________\n"
+					+ "\n--------------------------------\n"
+					+ "Shopping..."
 					+ "\n--------------------------------\n"
 					+ ">> [wk] $10 Weed Killer\n"
 					+ ">> [c ] $2  Carrots\n"
 					+ ">> [ss] Sell farm\n"
 					+ "<< [b ] Return to main menu\n");
+			System.out.print("> ");
 					
 			String input = scanner.nextLine();
 			
@@ -79,38 +90,49 @@ public class Farm {
 				return;
 			}
 
-			switch (input) {
+			switch (input.toLowerCase()) {
 			case "wk":
 				if (getBankBalance() >= 10) {
 					setBankBalanance(getBankBalance() - 10);
 					hasWeedKiller = true;
-				System.out.print("Weed Killer purchased!\n"
-						+ "Item was added to farming\n");
+				System.out.print("|----------------------|\n"
+						+ "Weed Killer purchased!\n"
+						+ "Item was added to farming\n"
+						+ "|----------------------|\n");
 			} else {
-				System.out.println("Not enough funds.\n");
+				System.out.println("|----------------------|\n"
+						+ "Not enough funds.\n"
+						+ "|----------------------|\n");
 			}
 				break;
 			case "c":
 				if (getBankBalance() >= 2) {
 					setBankBalanance(getBankBalance() - 2);
 					hasCarrots = true;
-				System.out.print("Carrot seeds purchased!\n"
-						+ "You can now plant carrots.\n");
+				System.out.print("|----------------------|\n"
+						+ "Carrot seeds purchased!\n"
+						+ "You can now plant carrots.\n"
+						+ "|----------------------|\n");
 			} else {
-				System.out.println("Not enough funds.\n");
+				System.out.println("|----------------------|\n"
+						+ "Not enough funds.\n"
+						+ "|----------------------|\n");
 			}
 				break;
 			case "ss":
-				totalLoss = totalProfit - getBankBalance();
-				System.out.print("Field Summary");
+				System.out.print("|----------------------|\n"
+						+ "| Field Summary\n");
 				System.out.print(field.getSummary());
-				System.out.print("Total Profit: $ " + totalProfit);
-				System.out.print("Total Loss: $ " + totalLoss);
-				System.out.print("Thank you for playing!");
+				System.out.print("| Total Profit: $ " + totalProfit + "\n");
+				System.out.print("| Thank you for playing!\n"
+						+ "|----------------------|\n");
 				System.exit(0);
 				break;
+				
+			case "b":
+				return;
 			default:
-				System.out.print("Invalid action. Try again.");
+				return;
 			}
 		}
 	}
@@ -118,26 +140,27 @@ public class Farm {
 	public void farmingOptions() {
 	
 		while (true) {
-			System.out.print("--------------------------------\n"
-					+ "Farming"
-					+ "\n--------------------------------\n"
-					+ "\n" + field
-					+"\n--------------------------------\n"
+			System.out.println("\n_________________________________\n"
 					+ "| Bank balance: $" + bankBalance
+					+ "\n________________________________\n"
+					+ field
 					+ "\n--------------------------------\n"
-					+ "\nEnter action [..] then location [x,y]\n"
+					+ "Farming..."
+					+ "\n--------------------------------\n"
+					+ "\nEnter action [..], "
+					+ "\nthen location [x,y]\n"
 					+ "\nFarm Menu\n"
 					+ ">> [t ] Till\n"
 					+ ">> [h ] Harvest\n"
 					+ ">> [p ] Plant\n"
-					+ ">> [pw] Pull weed\n");
+					+ ">> [pw] Pull weed");
 			if (hasWeedKiller) {
 				System.out.println(">> [wk] Apply Weed Killer");
 			}
-
-			System.out.println(">> [w ] Wait\n"
+			System.out.print(">> [w ] Wait\n"
 					+ ">> [fs] Field Summary\n"
 					+ "<< [b ] Return to main menu\n");
+			System.out.print("> ");
 			
 			String input = scanner.nextLine();
 			
@@ -152,7 +175,9 @@ public class Farm {
 			switch (cells[0]) {
 				case "wk":
 				 if (!hasWeedKiller) {
-					 System.out.println("You do not have Weed Killer.\n");
+					 System.out.println("|----------------------|\n"
+					 		+ "You do not have Weed Killer.\n"
+					 		+ "|----------------------|\n");
 					 break;
 				 }
 				String[] parts = input.split("");
@@ -165,7 +190,9 @@ public class Farm {
 						y = Integer.parseInt(cells[2]) - 1;
 						applyWeedKiller(x, y); 
 					} else {
-						System.out.print("Tool can only be applied to weeds.\n");
+						System.out.print("|----------------------|"
+								+ "Tool can only be applied to weeds.\n"
+								+ "|----------------------|\n");
 					}
 				}
 				break;
@@ -193,23 +220,22 @@ public class Farm {
 					break;
 				//plant
 				case "p":
-					 if (!hasCarrots) {
-						 System.out.println("You do not have carrots.\n");
-						 break;
-					 }
 					x = Integer.parseInt(cells[1]) - 1;
 					y = Integer.parseInt(cells[2]) - 1;					
 				
 						Item isSoil1 = field.get(x, y);
 						// checking soil instance
 						if (isSoil1 instanceof Soil) {
-							System.out.print("Enter\n"
-									+ "- [a] Apple $" + Apples.cost + "\n"
-									+ "- [g] Grain $" + Grain.cost + "\n");
+							System.out.println("\n|----------------------|\n"
+									+ "Select Seeds to plant\n"
+									+ "|----------------------|\n"
+									+ ">> [a] Apple $" + Apples.cost + "\n"
+									+ ">> [g] Grain $" + Grain.cost + "\n");
 							
 							 if (hasCarrots) {
-									System.out.println("- [c] Carrot $" + Carrots.cost + "\n");
+									System.out.print(">> [c] Carrot $" + Carrots.cost + "\n");
 								}
+							 System.out.print("> ");
 							// listens for next line of string
 							String option = scanner.nextLine();
 							
@@ -219,10 +245,14 @@ public class Farm {
 								if(bankBalance >= Apples.cost) {
 									field.plant(x, y, new Apples());
 									bankBalance -= Apples.cost;
-									System.out.println("Apple has been planted!\n");
+									System.out.println("|----------------------|\n"
+											+ "Apple has been planted!\n"
+											+ "|----------------------|\n");
 									break;
 								} else {
-									System.out.println("Sorry, not enough funds :(\n");
+									System.out.println("|----------------------|\n"
+											+ "Sorry, not enough funds :(\n"
+											+ "|----------------------|\n");
 								}
 							break;
 							// plant grain
@@ -230,25 +260,39 @@ public class Farm {
 								if(bankBalance >= Grain.cost) {
 									field.plant(x, y, new Grain());
 									bankBalance -= Grain.cost;
-									System.out.println("Grain has been planted!\n");
+									System.out.println("|----------------------|\n"
+											+ "Grain has been planted!\n"
+											+ "|----------------------|\n");
 									break;
 								} else {
-									System.out.println("Sorry, not enough funds :(\n");
+									System.out.println("|----------------------|\n"
+											+ "Sorry, not enough funds :(\n"
+											+ "|----------------------|\n");
 								}
 								break;
 								// plant grain
 							case "c":
+								if (!hasCarrots) {
+									 System.out.println("|----------------------|\n"
+									 		+ "You do not have carrots.\n"
+									 		+ "|----------------------|\n");
+									 break;
+								}
 								if(bankBalance >= Carrots.cost) {
 									field.plant(x, y, new Carrots());
 									bankBalance -= Grain.cost;
-									System.out.println("Carrot has been planted!\n");
+									System.out.println("|----------------------|\n"
+											+ "Carrot has been planted!\n"
+											+ "|----------------------|\n");
 									break;
 								} else {
-									System.out.println("Sorry, not enough funds :(\n");
+									System.out.println("|----------------------|\n"
+											+ "Sorry, not enough funds :(\n"
+											+ "|----------------------|\n");
 								}
 								break;
 						default:
-							System.out.println("Invalid action. Try again.");
+							return;
 							}
 						}
 					}
@@ -258,9 +302,9 @@ public class Farm {
 	// run the farm simulation
 	public void run() {
 		System.out.println("|----------------------|\n"
-				+ "| Congratulations!     |\n"
-				+ "| You've inherited your|\n"
-				+ "| grandfather's farm.  |\n"
+				+ "| Congratulations!     \n"
+				+ "| You've inherited your\n"
+				+ "| grandfather's farm.  \n"
 				+ "|----------------------|\n"
 				+ "\n"
 				+ "Name your farm:");
@@ -268,26 +312,28 @@ public class Farm {
 		
 		String farmName = scanner.nextLine();
 		
-		System.out.print(farmName + ", what a wonderful\n"
-				+ "name!\n");
+		System.out.print( "\n----------------------|\n"
+				+ "|" + farmName + " farm,\n"
+				+ "|what a wonderful\n"
+				+ "|name!\n"
+				+ "|----------------------|\n");
 		
 		while(true) {
 		
 			// display field
-			System.out.println("\n--------------------------------\n"
-					+ "| " + farmName + " Farm"
+			System.out.println("\n" + farmName + " Farm"
 					+ "\n--------------------------------\n"
 					+ "\n" + field
-					+"\n--------------------------------\n"
+					+"\n_________________________________\n"
 					+ "| Bank balance: $" + bankBalance
-					+ "\n--------------------------------\n"
+					+ "\n________________________________\n"
 					+ "\nEnter action [...]\n"
-
 					+ "\n> [f ] Farm"
 					+ "\n> [s ] Shop "
 					+ "\n> [fs] Field Summary"
 					+ "\n> [q ] Quit");
-		
+			System.out.print("> ");
+			
 			String input = scanner.nextLine();
 			
 			if ("q".equals(input)) {
@@ -304,11 +350,12 @@ public class Farm {
 						System.out.println(field.getSummary());
 					case "s":
 						shopOptions();
-					default:
-						System.out.println("Invalid action. Please try again.\n");		
 				}
 			} catch (Exception e) {
-				System.out.print("Error occured. Please try again.");
+				System.out.print("|----------------------|\n"
+						+ "Error occured.\n"
+						+ "Please try again.\n"
+						+ "|----------------------|\n");
 			}
 			
 		}

@@ -1,6 +1,7 @@
 package students;
 
 import students.items.Apples;
+import students.items.Carrots;
 import students.items.Food;
 import students.items.Grain;
 import students.items.Item;
@@ -99,12 +100,18 @@ public class Field {
 				if (field[row][column] instanceof Weed) {
 					// replace weed with untilledsoil 
 					field[row][column] = new UntilledSoil();
-					System.out.println("Weed has been removed!\n");
+					System.out.println("|----------------------|\n"
+							+ "Weed has been removed!\n"
+							+ "\n");
 				} else {
-					System.out.println("Weed cannot be pulled from location.");
+					System.out.println("|----------------------|\n"
+							+ "Weed cannot be pulled from location.\n"
+							+ "|----------------------|\n");
 				}
 			} else {
-				System.out.println("Location is outside of field dimensions.");
+				System.out.println("|----------------------|\n"
+						+ "Location is outside of field dimensions.\n"
+						+ "|----------------------|\n");
 			}
 		}
 	// get item copy from field location
@@ -186,11 +193,40 @@ public class Field {
 	}		
 	
 	public void checkRabbitRaid() {
-		if (countCarrots() > 2 && Math.random() < 0.5) {
-			commenceRabbits();
+		if (countMCarrots() > 2 && Math.random() < 0.8) {
+			commenceRabbits();	
 		}
 	}
-	
+	private int countMCarrots() {
+		int matureCarrotCount = 0;
+		for (int row = 0; row < field.length; row++) {
+			for (int column = 0; column < field[row].length; column++) {
+			Item item = field[row][column];
+			if (item instanceof Carrots && item.getAge() >= item.getMaturAge()) {
+				matureCarrotCount++;
+				}
+			}
+		}
+		return matureCarrotCount;
+	}
+	private void commenceRabbits() {
+		for (int row = 0; row < field.length; row++) {
+			for (int column = 0; column < field[row].length; column++) { 
+				Item item = field[row][column];
+				if (item != null) {
+					field[row][column] = new Weed();
+				}
+			}
+		}
+		System.out.println("|----------------------|"
+				+ "Oh no!\n"
+				+ "A rabbit raid has occured!\n"
+				+ "There were too many grown\n"
+				+ "carrots on the field.\n"
+				+ "All crops have been eaten :(\n"
+				+ "|----------------------|");
+	}
+
 	// applied 2D array representation
 		public void applyWeedKiller(int cenX, int cenY) {
 			// defines radius for aoe
