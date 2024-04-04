@@ -6,43 +6,36 @@ import students.items.Grain;
 import students.items.Item;
 import students.items.Soil;
 import students.items.Weed;
-import students.Field;
-import students.tools.WeedKiller;
 
 public class Farm {
 	
 	// initialise
 	private Scanner scanner; 
 	private Field field;
-	private Shop shop;
 	private int bankBalance;
-	private int totalProfits = 0;
+	private int totalProfit = 0;
 	private int totalLoss = 0;
 	private boolean hasWeedKiller = false;
 
-	
 	// initialise farm size and player money
 	public Farm(int fieldWidth, int fieldHeight, int startingFunds)
 	{
 		this.field = new Field(fieldHeight, fieldWidth);
 		this.bankBalance = startingFunds;
 		this.scanner = new Scanner(System.in);
-		this.shop = new Shop(this);
 	}
-	
 	// getter for Shop class to access
 	public int getBankBalance() {
 		return bankBalance;
 	}
-	
 	// setter for Shop class to access
 	public void setBankBalanance(int bankBalance) {
 		this.bankBalance = bankBalance;
 	}
 	
 	// kills weeds in a 3x3
-	public void applyWeedKiller(int cenX, int cenY) {
-		field.applyWeedKiller(cenX, cenY);
+	public void applyWeedKiller(int x, int y) {
+		applyWeedKiller(x, y);
 		System.out.println("Weeds Killer was applied! It's super effective!");
 	}
 	
@@ -68,6 +61,7 @@ public class Farm {
 	}
 	// 3 tick passes
 	public void rest() {
+		for (int time = 0; time < 3; time++)
 		field.tick();
 		System.out.print("And so you rest...");
 	}
@@ -87,23 +81,25 @@ public class Farm {
 
 			switch (input) {
 			case "wk":
-				if ()
+				if (getBankBalance() >= 50) {
+					setBankBalanance(getBankBalance() - 50);
+					hasWeedKiller = true;
 				System.out.print("Weed Killer purchased!");
+			} else {
+				System.out.println("Not enough funds.");
+			}
+				break;
+			case "sf":
+				totalLoss = totalProfit - getBankBalance();
+				System.out.print("Field Summary");
+				System.out.print(field.getSummary());
+				System.out.print("Total Profit: $ " + totalProfit);
+				System.out.print("Total Loss: $ " + totalLoss);
+				System.out.print("Thank you for playing!");
+				System.exit(0);
 				break;
 			default:
 				System.out.print("Invalid action. Try again.");
-			// till untilled soil
-//			case "Sell Farm":
-//				System.out.print("If you sell your farm,"
-//						+ "you will end the game."
-//						+ "Do you wish to proceed?");
-//				//???
-//				// if user input Y
-//				sellFarm();
-//				// else
-//				break;
-				
-
 			}
 		}
 	}
@@ -127,7 +123,8 @@ public class Farm {
 			}
 			
 			String[] cells = input.split(" ");
-			int x, y;
+			int x = 0; 
+			int y = 0;
 			
 			switch (cells[0]) {
 				case "wk":
@@ -180,9 +177,9 @@ public class Farm {
 					x = Integer.parseInt(cells[1]) - 1;
 					y = Integer.parseInt(cells[2]) - 1;					
 				
-						Item isSoil = field.get(x, y);
+						Item isSoil1 = field.get(x, y);
 						// checking soil instance
-						if (isSoil instanceof Soil) {
+						if (isSoil1 instanceof Soil) {
 							System.out.print("Enter\n"
 									+ "- 'a' to buy an apple for $" + Apples.cost + "\n"
 									+ "- 'g' to buy grain for $" + Grain.cost + "\n");
@@ -254,7 +251,6 @@ public class Farm {
 			String[] cells = input.split(" ");
 			if ("q".equals(input)) break; 
 			int x, y;
-
 			// actions - try, switch, case for options
 			try {
 				switch (cells[0]) {

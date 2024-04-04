@@ -182,4 +182,25 @@ public class Field {
 						"\nTotal grain created: " + Grain.getGenerationCount() 
 						+ "\n");
 	}		
+	
+	// applied 2D array representation
+		public void applyWeedKiller(int cenX, int cenY) {
+			// defines radius for aoe
+			int range = 1;
+			// iterate over rows in the 3x3 grid centred at x, y
+			for (int row = cenX - range; row <= cenX + range; row++) {
+				// iterate over columns in the 3x3 grid centred at x, y
+				for (int column = cenY - range; column <= cenY + range; column++) {
+					// check if current cell is within field
+					if (row >= 0 && row < field.length && column < field[0].length) {
+						// access item in field location
+						Item fieldItem = field[row][column];
+						if (fieldItem instanceof Weed) {
+							// replace weed with soil
+							field[row][column] = new UntilledSoil();
+						}
+					}
+				}
+			}
+		}
 }

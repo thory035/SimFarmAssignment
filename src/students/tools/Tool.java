@@ -31,5 +31,18 @@ public abstract class Tool extends Item{
 		return strength;
 	}
 	
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+			if(!(obj instanceof Tool))
+				return false;
+
+		Tool tool = (Tool) obj;
+		
+		return (this.toolName == tool.toolName)
+				&& (this.durability == tool.durability)
+				&& (this.strength == tool.strength);
+	}	
+	
 	
 }

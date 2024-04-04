@@ -52,7 +52,7 @@ public abstract class Item implements Cloneable {
 				return 0;
 			}
 		}
-		// adjusted original equals() to recognise tool as an object
+	
 		public boolean equals(Object obj) {
 			if (this == obj)
 				return true;
