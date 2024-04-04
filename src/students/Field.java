@@ -148,6 +148,7 @@ public class Field {
 	// create summary of total value of items on field
 	public String getSummary() {
 	 int appleCount = 0;
+	 int carrotsCount = 0;
 	 int grainCount = 0;
 	 int soilCount = 0;
 	 int untilledCount = 0;
@@ -173,6 +174,7 @@ public class Field {
 	}
 	// return summary as a string
 	return String.format("Apples: "+ appleCount +
+						"\nCarrots: "+ carrotsCount +
 						"\nGrain: " + grainCount +
 						"\nSoil: " + soilCount +
 						"\nUntilled: " + untilledCount +
@@ -197,7 +199,7 @@ public class Field {
 						Item fieldItem = field[row][column];
 						if (fieldItem instanceof Weed) {
 							// replace weed with soil
-							field[row][column] = new UntilledSoil();
+							field[row][column] = new Soil();
 						}
 					}
 				}
