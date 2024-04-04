@@ -70,7 +70,7 @@ public class Farm {
 		while (true) {
 			System.out.println("\nWelome customer!"
 					+ "-----------------------\n"
-					+ "--> [wk] $50 Weed Killer\n"
+					+ "--> [wk] $10 Weed Killer\n"
 					+ "--> [b ] Return to main menu\n");
 					
 			String input = scanner.nextLine();
@@ -81,8 +81,8 @@ public class Farm {
 
 			switch (input) {
 			case "wk":
-				if (getBankBalance() >= 50) {
-					setBankBalanance(getBankBalance() - 50);
+				if (getBankBalance() >= 10) {
+					setBankBalanance(getBankBalance() - 10);
 					hasWeedKiller = true;
 				System.out.print("Weed Killer purchased!");
 			} else {
@@ -106,18 +106,27 @@ public class Farm {
 	
 	public void farmingOptions() {
 		while (true) {
-			System.out.println("Farm\n");
-			System.out.println("| [t ] Till\n");
-			System.out.println( "| [h ] Harvest\n");
-			System.out.println("| [p ] Plant\n");
-			System.out.println( "| [pw] Pull weed\n");
+			System.out.print("--------------------------------\n"
+					+ "Farming"
+					+ "\n--------------------------------\n"
+					+ "\n" + field
+					+"\n--------------------------------\n"
+					+ "| Bank balance: $" + bankBalance
+					+ "\n--------------------------------\n"
+					+ "\nEnter action [..] then location [x,y]\n");
+			System.out.println("\nFarm Menu");
+			System.out.println(">> [t ] Till");
+			System.out.println( ">> [h ] Harvest");
+			System.out.println(">> [p ] Plant");
+			System.out.println( ">> [pw] Pull weed");
 			if (hasWeedKiller) {
-				System.out.println("| [wk] Apply Weed Killer");
+				System.out.println(">> [wk] Apply Weed Killer");
 			}
-			System.out.println("| [fs] Field Summary\n");
-			System.out.println( "| [b ] Return to main menu\n");
+			System.out.println(">> [fs] Field Summary");
+			System.out.println( "<< [b ] Return to main menu");
 			
 			String input = scanner.nextLine();
+			
 			if ("b".equals(input)) {
 				return;
 			}
@@ -132,7 +141,6 @@ public class Farm {
 					 System.out.println("You do not have Weed Killer.");
 					 break;
 				 }
-				 
 				System.out.println("enter wk and select cells (x,y)");
 				input = scanner.nextLine();
 				String[] parts = input.split("");
@@ -181,8 +189,8 @@ public class Farm {
 						// checking soil instance
 						if (isSoil1 instanceof Soil) {
 							System.out.print("Enter\n"
-									+ "- 'a' to buy an apple for $" + Apples.cost + "\n"
-									+ "- 'g' to buy grain for $" + Grain.cost + "\n");
+									+ "- [a] Apple $" + Apples.cost + "\n"
+									+ "- [g] Grain $" + Grain.cost + "\n");
 							// listens for next line of string
 							String option = scanner.nextLine();
 							
@@ -249,11 +257,11 @@ public class Farm {
 		
 			String input = scanner.nextLine();
 			String[] cells = input.split(" ");
+			
 			if ("q".equals(input)) break; 
-			int x, y;
 			// actions - try, switch, case for options
 			try {
-				switch (cells[0]) {
+				switch (input.toLowerCase()) {
 					case "f":
 						farmingOptions();
 						break;
