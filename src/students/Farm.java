@@ -1,23 +1,27 @@
 package students;
 
 import java.util.Scanner;
-
 import students.items.Apples;
 import students.items.Grain;
 import students.items.Item;
 import students.items.Soil;
+import students.items.Weed;
 import students.Field;
+import students.tools.WeedKiller;
 
 public class Farm {
 	
-	// initialise Field 
-	private Field field;
-	private int bankBalance;
+	// initialise
 	private Scanner scanner; 
-	// initialise shop
+	private Field field;
 	private Shop shop;
+	private int bankBalance;
+	private int totalProfits = 0;
+	private int totalLoss = 0;
+	private boolean hasWeedKiller = false;
+
 	
-	// initialise farm with appropriate size and player money
+	// initialise farm size and player money
 	public Farm(int fieldWidth, int fieldHeight, int startingFunds)
 	{
 		this.field = new Field(fieldHeight, fieldWidth);
@@ -26,16 +30,23 @@ public class Farm {
 		this.shop = new Shop(this);
 	}
 	
-	// getter created for the new Shop class to access
+	// getter for Shop class to access
 	public int getBankBalance() {
 		return bankBalance;
 	}
 	
-	// setter created for the new Shop class to access
+	// setter for Shop class to access
 	public void setBankBalanance(int bankBalance) {
 		this.bankBalance = bankBalance;
 	}
 	
+	// kills weeds in a 3x3
+	public void applyWeedKiller(int cenX, int cenY) {
+		field.applyWeedKiller(cenX, cenY);
+		System.out.println("Weeds Killer was applied! It's super effective!");
+	}
+	
+	// farming
 	public void harvest(int x, int y) {
 		// return item or null
 		Item item = field.get(x, y);
@@ -50,50 +61,115 @@ public class Farm {
 			System.out.println("Cannot be harvested.\n");
 		}
 	}
-	
+	// 1 tick passes
 	public void toWait() {
 		 field.tick();
 		 System.out.println("And so you wait...\n");
 	}
+	// 3 tick passes
+	public void rest() {
+		field.tick();
+		System.out.print("And so you rest...");
+	}
+	
+	public void shopOptions() {
+		while (true) {
+			System.out.println("\nWelome customer!"
+					+ "-----------------------\n"
+					+ "--> [wk] $50 Weed Killer\n"
+					+ "--> [b ] Return to main menu\n");
+					
+			String input = scanner.nextLine();
+			
+			if ("b".equals(input)) {
+				return;
+			}
+
+			switch (input) {
+			case "wk":
+				if ()
+				System.out.print("Weed Killer purchased!");
+				break;
+			default:
+				System.out.print("Invalid action. Try again.");
+			// till untilled soil
+//			case "Sell Farm":
+//				System.out.print("If you sell your farm,"
+//						+ "you will end the game."
+//						+ "Do you wish to proceed?");
+//				//???
+//				// if user input Y
+//				sellFarm();
+//				// else
+//				break;
+				
+
+			}
+		}
+	}
 	
 	public void farmingOptions() {
 		while (true) {
-			System.out.println("\n Enter action then"
-					+ "\n enter the location on field."
-					+ "\n eg. p 1(row) 2(column)\n"
-					+ "Farm\n"
-					+ "| []t x y: till\n"
-					+ "| [h ] harvest\n"
-					+ "| [p ] plant\n"
-					+ "| [pw] pull weed\n"
-					+ "| [fs] field summary\n"
-					+ "| [b ] Return to main menu");
+			System.out.println("Farm\n");
+			System.out.println("| [t ] Till\n");
+			System.out.println( "| [h ] Harvest\n");
+			System.out.println("| [p ] Plant\n");
+			System.out.println( "| [pw] Pull weed\n");
+			if (hasWeedKiller) {
+				System.out.println("| [wk] Apply Weed Killer");
+			}
+			System.out.println("| [fs] Field Summary\n");
+			System.out.println( "| [b ] Return to main menu\n");
 			
 			String input = scanner.nextLine();
-			String[] cells = input.split("");
+			if ("b".equals(input)) {
+				return;
+			}
+			
+			String[] cells = input.split(" ");
 			int x, y;
 			
 			switch (cells[0]) {
-				// till untilled soil
+				case "wk":
+				 if (!hasWeedKiller) {
+					 System.out.println("You do not have Weed Killer.");
+					 break;
+				 }
+				 
+				System.out.println("enter wk and select cells (x,y)");
+				input = scanner.nextLine();
+				String[] parts = input.split("");
+				Item isSoil = field.get(x, y);
+				// check if field location is soil or weed
+				if (isSoil instanceof Soil|| isSoil instanceof Weed) {
+					if(parts.length >= 2) {
+						// correctly map zero-based indexing system
+						x = Integer.parseInt(cells[1]) - 1;
+						y = Integer.parseInt(cells[2]) - 1;
+						applyWeedKiller(x, y); 
+						System.out.println("Weed Killer successfully applied!");
+					} else {
+						System.out.print("Tool can only be applied to weeds");
+					}
+				}
+				break;
+				// till UntilledSoil
 				case "t":
-					// convert str into int and correctly access the right element by -1
-					// correctly map zero-based indexing system
 					x = Integer.parseInt(cells[1]) - 1;
 					y = Integer.parseInt(cells[2]) - 1;
-					// till this location
 					field.till(x, y); 
 					break;
-				//harvest
+				//harvest planted item
 				case "h":
 					x = Integer.parseInt(cells[1]) - 1;
 					y = Integer.parseInt(cells[2]) - 1;
 					harvest(x, y);
 					break;
-					 //wait
+				//wait = 1 tick()
 				case "w":
 					toWait();
 					break;
-					// pull weed
+				// pull weed
 				case "pw":
 					x = Integer.parseInt(cells[1]) - 1;
 					y = Integer.parseInt(cells[2]) - 1;
@@ -136,11 +212,14 @@ public class Farm {
 								System.out.println("Sorry, not enough funds :(\n");
 							}
 							break;
+						default:
+							System.out.println("Invalid action. Try again.");
 							}
 						}
 					}
 				}
 			}
+			
 	// run the farm simulation
 	public void run() {
 		System.out.println("Congratulations!\n"
@@ -165,15 +244,16 @@ public class Farm {
 					+ "\n--------------------------------\n"
 					+ "\nEnter action [...]\n"
 
-					+ "\n--> [f ] Farm"
-					+ "\n--> [s ] Shop "
-					+ "\n--> [r ] Rest "
-					+ "\n--> [fs] Field Summary"
-					+ "\n--> [q ] Quit");
+					+ "\n> [f ] Farm"
+					+ "\n> [s ] Shop "
+					+ "\n> [r ] Rest "
+					+ "\n> [fs] Field Summary"
+					+ "\n> [q ] Quit");
 		
 			String input = scanner.nextLine();
 			String[] cells = input.split(" ");
 			if ("q".equals(input)) break; 
+			int x, y;
 
 			// actions - try, switch, case for options
 			try {
@@ -184,8 +264,7 @@ public class Farm {
 					case "fs":
 						System.out.println(field.getSummary());
 					case "s":
-						enterShop();
-						break;
+						shopOptions();
 					case "r":
 						rest();
 						break;
