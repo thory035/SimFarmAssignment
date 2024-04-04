@@ -3,6 +3,7 @@ package students;
 import java.util.Scanner;
 import students.items.Apples;
 import students.items.Grain;
+import students.items.Carrots;
 import students.items.Item;
 import students.items.Soil;
 import students.items.Weed;
@@ -16,6 +17,7 @@ public class Farm {
 	private int totalProfit = 0;
 	private int totalLoss = 0;
 	private boolean hasWeedKiller = false;
+	private boolean hasCarrots = false;
 
 	// initialise farm size and player money
 	public Farm(int fieldWidth, int fieldHeight, int startingFunds)
@@ -66,8 +68,10 @@ public class Farm {
 			System.out.println("\n--------------------------------\n"
 					+ "Shoping"
 					+ "\n--------------------------------\n"
-					+ "--> [wk] $10 Weed Killer\n"
-					+ "--> [b ] Return to main menu\n");
+					+ ">> [wk] $10 Weed Killer\n"
+					+ ">> [c ] $2  Carrots\n"
+					+ ">> [ss] Sell farm\n"
+					+ "<< [b ] Return to main menu\n");
 					
 			String input = scanner.nextLine();
 			
@@ -86,7 +90,9 @@ public class Farm {
 				System.out.println("Not enough funds.\n");
 			}
 				break;
-			case "sf":
+			case "c":
+				if 
+			case "ss":
 				totalLoss = totalProfit - getBankBalance();
 				System.out.print("Field Summary");
 				System.out.print(field.getSummary());
@@ -179,6 +185,10 @@ public class Farm {
 					break;
 				//plant
 				case "p":
+					 if (!hasCarrots) {
+						 System.out.println("You do not have carrots.\n");
+						 break;
+					 }
 					x = Integer.parseInt(cells[1]) - 1;
 					y = Integer.parseInt(cells[2]) - 1;					
 				
@@ -188,6 +198,10 @@ public class Farm {
 							System.out.print("Enter\n"
 									+ "- [a] Apple $" + Apples.cost + "\n"
 									+ "- [g] Grain $" + Grain.cost + "\n");
+							
+							 if (hasCarrots) {
+									System.out.println(">> [c] Carrot $" + Carrots.cost + "\n");
+								}
 							// listens for next line of string
 							String option = scanner.nextLine();
 							
@@ -203,17 +217,28 @@ public class Farm {
 									System.out.println("Sorry, not enough funds :(\n");
 								}
 							break;
-						// plant grain
-						case "g":
-							if(bankBalance >= Grain.cost) {
-								field.plant(x, y, new Grain());
-								bankBalance -= Grain.cost;
-								System.out.println("Grain has been planted!\n");
+							// plant grain
+							case "g":
+								if(bankBalance >= Grain.cost) {
+									field.plant(x, y, new Grain());
+									bankBalance -= Grain.cost;
+									System.out.println("Grain has been planted!\n");
+									break;
+								} else {
+									System.out.println("Sorry, not enough funds :(\n");
+								}
 								break;
-							} else {
-								System.out.println("Sorry, not enough funds :(\n");
-							}
-							break;
+								// plant grain
+							case "c":
+								if(bankBalance >= Carrots.cost) {
+									field.plant(x, y, new Carrots());
+									bankBalance -= Grain.cost;
+									System.out.println("Carrot has been planted!\n");
+									break;
+								} else {
+									System.out.println("Sorry, not enough funds :(\n");
+								}
+								break;
 						default:
 							System.out.println("Invalid action. Try again.");
 							}
