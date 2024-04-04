@@ -91,7 +91,15 @@ public class Farm {
 			}
 				break;
 			case "c":
-				if 
+				if (getBankBalance() >= 2) {
+					setBankBalanance(getBankBalance() - 2);
+					hasCarrots = true;
+				System.out.print("Carrot seeds purchased!\n"
+						+ "You can now plant carrots.\n");
+			} else {
+				System.out.println("Not enough funds.\n");
+			}
+				break;
 			case "ss":
 				totalLoss = totalProfit - getBankBalance();
 				System.out.print("Field Summary");
@@ -200,7 +208,7 @@ public class Farm {
 									+ "- [g] Grain $" + Grain.cost + "\n");
 							
 							 if (hasCarrots) {
-									System.out.println(">> [c] Carrot $" + Carrots.cost + "\n");
+									System.out.println("- [c] Carrot $" + Carrots.cost + "\n");
 								}
 							// listens for next line of string
 							String option = scanner.nextLine();

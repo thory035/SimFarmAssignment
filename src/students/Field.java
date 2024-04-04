@@ -173,7 +173,7 @@ public class Field {
 		}
 	}
 	// return summary as a string
-	return String.format("Apples: "+ appleCount +
+	return String.format("\nApples: "+ appleCount +
 						"\nCarrots: "+ carrotsCount +
 						"\nGrain: " + grainCount +
 						"\nSoil: " + soilCount +
@@ -184,6 +184,12 @@ public class Field {
 						"\nTotal grain created: " + Grain.getGenerationCount() 
 						+ "\n");
 	}		
+	
+	public void checkRabbitRaid() {
+		if (countCarrots() > 2 && Math.random() < 0.5) {
+			commenceRabbits();
+		}
+	}
 	
 	// applied 2D array representation
 		public void applyWeedKiller(int cenX, int cenY) {
