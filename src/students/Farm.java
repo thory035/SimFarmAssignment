@@ -9,7 +9,6 @@ import students.items.Soil;
 import students.items.Weed;
 
 public class Farm {
-	
 	// initialise
 	private Scanner scanner; 
 	private static String farmName;
@@ -81,7 +80,6 @@ public class Farm {
 					+ ">> [ss] Sell Farm\n"
 					+ "<< [b ] Return to Main Menu\n");
 			System.out.print("> ");
-					
 			String input = scanner.nextLine();
 			if ("b".equals(input)) {
 				return;
@@ -178,11 +176,9 @@ public class Farm {
 					+ "<< [b ] Return to main menu");
 			System.out.print("> ");
 			String input = scanner.nextLine();
-			
 			if ("b".equals(input)) {
 				return;
 			}
-			
 			String[] cells = input.split(" ");
 			int x = 0; 
 			int y = 0;
@@ -258,7 +254,6 @@ public class Farm {
 								}
 							 System.out.print("> ");
 							String option = scanner.nextLine();
-							
 							switch(option) {
 							// plant apple
 							case "a":
@@ -321,7 +316,7 @@ public class Farm {
 					}
 				}
 			}
-			
+	// opening message to user
 	public void askFarmName() {
 		// opening message
 		if (this.farmName == null) {

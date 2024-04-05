@@ -4,20 +4,17 @@ public class Apples extends Food implements Cloneable {
 	// counter to track Apple instances
 	public static int generationCount = 0;
 	public static int cost = 2;
-	
 	// superclass constructor
 	public Apples() {
 		super(3, 5, 3);
 		// counter: incremental(1)
 		generationCount++;
 	}
-	
 	@Override
 	public Apples clone() {
 		Apples cloned = (Apples) super.clone();
 		return cloned;
 	}
-	
 	@Override
 	public String toString() {
 		if (age >= maturAge) {

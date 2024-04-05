@@ -5,20 +5,17 @@ public class Carrots extends Food implements Cloneable {
 	public static int generationCount = 0;
 	public static int cost = 1;
 	
-	// superclass constructor
+	// constructor
 	public Carrots() {
 		super(2, 5, 5);
 		// counter: incremental(1)
 		generationCount++;
 	}
-	
 	@Override
 	public Carrots clone() {
 		Carrots cloned = (Carrots) super.clone();
-
 		return cloned;
 	}
-	
 	@Override
 	public String toString() {
 		if (age >= maturAge) {

@@ -93,8 +93,7 @@ public class Field {
 			field[row][column] = new Soil();
 		}
 	}
-	
-	
+	// pull weeds one at a time
 	public void pull(int row, int column) {
 		// at this column and row location
 		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
