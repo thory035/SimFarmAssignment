@@ -7,7 +7,7 @@ public class Carrots extends Food implements Cloneable {
 	
 	// superclass constructor
 	public Carrots() {
-		super(2, 5, 3);
+		super(2, 5, 5);
 	}
 	
 	@Override

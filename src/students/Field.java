@@ -102,15 +102,17 @@ public class Field {
 					field[row][column] = new UntilledSoil();
 					System.out.println("|----------------------|\n"
 							+ "Weed has been removed!\n"
-							+ "\n");
+							+ "|----------------------|\n");
 				} else {
 					System.out.println("|----------------------|\n"
-							+ "Weed cannot be pulled from location.\n"
+							+ "Weed cannot be pulled "
+							+ "from location.\n"
 							+ "|----------------------|\n");
 				}
 			} else {
 				System.out.println("|----------------------|\n"
-						+ "Location is outside of field dimensions.\n"
+						+ "Location is outside of "
+						+ "field dimensions.\n"
 						+ "|----------------------|\n");
 			}
 		}
@@ -132,6 +134,8 @@ public class Field {
 		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
 			// if dimensions are true, plant item
 			this.field[row][column] = item;
+			
+			
 		}
 			}
 	// calculate total value of all items in the Field
@@ -154,13 +158,17 @@ public class Field {
 	}
 	// create summary of total value of items on field
 	public String getSummary() {
-	 int appleCount = 0;
-	 int carrotsCount = 0;
+	 int appleCount = 0;	
 	 int grainCount = 0;
+	 int carrotCount = 0;
 	 int soilCount = 0;
 	 int untilledCount = 0;
 	 int weedCount = 0;
-	 int totalValue = 0;
+	 
+	 int totalApplesValue = Apples.getGenerationCount() * Apples.value;
+	 int totalGrainValue = Grain.getGenerationCount() * Grain.value;
+	 int totalCarrotsValue = Carrots.getGenerationCount()* Carrots.value;
+	 int totalValueHarvested = totalApplesValue + totalGrainValue + totalCarrotsValue;
 	 // iterate through items on Field
 	 for (Item[] row : field) {
 		 for (Item item : row) {
@@ -168,28 +176,33 @@ public class Field {
 				 // increment based on type
 				 if (item instanceof Apples) appleCount++;
 				 else if (item instanceof Grain) grainCount++;
+				 else if (item instanceof Carrots) carrotCount++;
 				 else if (item instanceof Soil) soilCount++;
 				 else if (item instanceof UntilledSoil) untilledCount++;
 				 else if (item instanceof Weed) weedCount++;
 				 // if item is an instance 
 				 if (item instanceof Food && item.getValue() > 0) {
 					 // add to total value
-					 totalValue += item.getValue();
+					 totalValueHarvested += item.getValue();
 				}	
 			}
 		}
 	}
 	// return summary as a string
-	return String.format("\nApples: "+ appleCount +
-						"\nCarrots: "+ carrotsCount +
+	return String.format("\n......................\n" + 
+						"Current items on farm field:\n" +
+						"Apples: "+ appleCount +
+						"\nCarrots: "+ carrotCount +
 						"\nGrain: " + grainCount +
 						"\nSoil: " + soilCount +
 						"\nUntilled: " + untilledCount +
 						"\nWeed: " + weedCount +
-						"\nFor a total of $: " + totalValue +
-						"\nTotal apples created: " + Apples.getGenerationCount() +
-						"\nTotal grain created: " + Grain.getGenerationCount() 
-						+ "\n");
+						"Harvested items:\n" +
+						"\nFor a total of $: " + totalValueHarvested +
+						"\nTotal apples: " + Apples.getGenerationCount() +
+						"\nTotal grain: " + Grain.getGenerationCount() +
+						"\nTotal carrots: " + Carrots.getGenerationCount() +
+						"\n......................\n");
 	}		
 	
 	public void checkRabbitRaid() {

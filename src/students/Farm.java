@@ -51,13 +51,16 @@ public class Farm {
 		if (item != null && item.getAge() >= item.getMaturAge()) {
 			// add item value to bankBalance
 			bankBalance += item.getValue();
+			totalProfit += item.getValue();
 			//adds Soil item to this cell
 			field.plant(x, y, new Soil());
 			System.out.println("|----------------------|\n"
 					+ "Item has been harvested\n!"
 					+ "|----------------------|\n");
 		} else {
-			System.out.println("Cannot be harvested.\n");
+			System.out.println("|----------------------|\n"
+					+ "Cannot be harvested.\n"
+					+ "|----------------------|\n");
 		}
 	}
 	// 1 tick passes
@@ -176,7 +179,8 @@ public class Farm {
 				case "wk":
 				 if (!hasWeedKiller) {
 					 System.out.println("|----------------------|\n"
-					 		+ "You do not have Weed Killer.\n"
+					 		+ "You do not have "
+					 		+ "Weed Killer.\n"
 					 		+ "|----------------------|\n");
 					 break;
 				 }
@@ -191,7 +195,8 @@ public class Farm {
 						applyWeedKiller(x, y); 
 					} else {
 						System.out.print("|----------------------|"
-								+ "Tool can only be applied to weeds.\n"
+								+ "Tool can only be "
+								+ "applied to weeds.\n"
 								+ "|----------------------|\n");
 					}
 				}
@@ -212,6 +217,8 @@ public class Farm {
 				case "w":
 					toWait();
 					break;
+				case "fs":
+					System.out.println(field.getSummary());
 				// pull weed
 				case "pw":
 					x = Integer.parseInt(cells[1]) - 1;
@@ -226,7 +233,7 @@ public class Farm {
 						Item isSoil1 = field.get(x, y);
 						// checking soil instance
 						if (isSoil1 instanceof Soil) {
-							System.out.println("\n|----------------------|\n"
+							System.out.print("\n|----------------------|\n"
 									+ "Select Seeds to plant\n"
 									+ "|----------------------|\n"
 									+ ">> [a] Apple $" + Apples.cost + "\n"
@@ -245,7 +252,7 @@ public class Farm {
 								if(bankBalance >= Apples.cost) {
 									field.plant(x, y, new Apples());
 									bankBalance -= Apples.cost;
-									System.out.println("|----------------------|\n"
+									System.out.println("\n|----------------------|\n"
 											+ "Apple has been planted!\n"
 											+ "|----------------------|\n");
 									break;
