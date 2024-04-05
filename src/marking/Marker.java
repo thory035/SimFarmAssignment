@@ -32,7 +32,7 @@ public class Marker {
 		System.out.println(a.getValue()); // should print 3
 	System.out.println(a); // should print "A"
 		System.out.println(a.died()); // should print false
-//		a.tick();
+		a.tick();
 		System.out.println(a.died()); // should print true
 		Food testFood = a; // this should be possible
 		Item testItem = testFood; // this should be possible

@@ -68,13 +68,12 @@ public class Farm {
 	// 1 tick passes
 	public void toWait() {
 		 field.tick();
-		 // chance occurrence
-		 field.checkRabbitRaid();
 		 System.out.println("|----------------------|\n"
-		 		+ "And so you wait...\n"
-		 		+ "|----------------------|\n");
-	}
-	
+		 		+ "  And so you wait...\n"
+		 		+ "|----------------------|");
+		// chance occurrence
+				 field.checkRabbitRaid();
+		 }
 	// shopping options
 	public void shopOptions() {
 		while (true) {
@@ -83,9 +82,9 @@ public class Farm {
 					+ "Shopping..."
 					+ "\n--------------------------------\n"
 					+ ">> [wk] $10 Weed Killer\n"
-					+ ">> [c ] $2  Carrots\n"
-					+ ">> [ss] Sell farm\n"
-					+ "<< [b ] Return to main menu\n");
+					+ ">> [c ] $2  Carrot Seeds\n"
+					+ ">> [ss] Sell Farm\n"
+					+ "<< [b ] Return to Main Menu\n");
 			System.out.print("> ");
 					
 			String input = scanner.nextLine();
@@ -95,33 +94,43 @@ public class Farm {
 			// takes capitalised letter to lower case
 			switch (input.toLowerCase()) {
 			case "wk":
-				// calculations for purchase
-				if (getBankBalance() >= 10) {
-					setBankBalanance(getBankBalance() - 10);
-					hasWeedKiller = true;
-				System.out.print("|----------------------|\n"
-						+ "Weed Killer purchased!\n"
-						+ "Item was added to farming\n"
-						+ "|----------------------|\n");
-			} else {
-				System.out.println("|----------------------|\n"
-						+ "Not enough funds :(\n"
-						+ "|----------------------|\n");
-			}
+				if (hasWeedKiller) {
+					System.out.println("Already purchased."
+							+ "|----------------------|\n");
+				} else {
+					// calculations for purchase
+					if (getBankBalance() >= 10) {
+						setBankBalanance(getBankBalance() - 10);
+						hasWeedKiller = true;
+					System.out.print("|----------------------|\n"
+							+ "Weed Killer purchased!\n"
+							+ "Item was added to farming\n"
+							+ "|----------------------|\n");
+					} else {
+						System.out.println("|----------------------|\n"
+								+ "Not enough funds.\n");
+					}
+				}
 				break;
 			case "c":
-				// calculations for purchase
-				if (getBankBalance() >= 2) {
-					setBankBalanance(getBankBalance() - 2);
-					hasCarrots = true;
-				System.out.print("|----------------------|\n"
-						+ "Carrot seeds purchased!\n"
-						+ "You can now plant carrots.\n"
-						+ "|----------------------|\n");
-			} else {
-				System.out.println("|----------------------|\n"
-						+ "Not enough funds.\n"
-						+ "|----------------------|\n");
+				if (hasCarrots) {
+					System.out.println("|----------------------|\n"
+							+ "Already purchased\n"
+							+ "|----------------------|");
+				} else {
+					// calculations for purchase
+					if (getBankBalance() >= 2) {
+						setBankBalanance(getBankBalance() - 2);
+						hasCarrots = true;
+					System.out.print("|----------------------|\n"
+							+ "Carrot seeds purchased!\n"
+							+ "You can now plant carrots.\n"
+							+ "|----------------------|\n");
+					} else {
+					System.out.println("|----------------------|\n"
+							+ "Not enough funds.\n"
+							+ "|----------------------|\n");
+				}
 			}
 				break;
 			case "ss":

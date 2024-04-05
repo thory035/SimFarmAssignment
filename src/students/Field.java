@@ -226,19 +226,19 @@ public class Field {
 			for (int column = 0; column < field[row].length; column++) { 
 				Item item = field[row][column];
 				if (item != null) {
-					field[row][column] = new Weed();
+					field[row][column] = new UntilledSoil();
 				}
 			}
 		}
-		System.out.println("|----------------------|"
-				+ "Oh no!\n"
+		System.out.println("Oh no!\n"
 				+ "A rabbit raid has occured!\n"
 				+ "There were too many grown\n"
 				+ "carrots on the field.\n"
-				+ "All crops have been eaten :(\n"
-				+ "|----------------------|");
+				+ "All crops have been eaten\n"
+				+ "and the field was destroyed\n"
+				+ ":("
+				+ "|----------------------|\n");
 	}
-
 	// applied 2D array representation
 		public void applyWeedKiller(int cenX, int cenY) {
 			// defines radius for aoe
