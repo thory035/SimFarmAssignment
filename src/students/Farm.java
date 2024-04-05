@@ -14,7 +14,7 @@ public class Farm {
 	private Scanner scanner; 
 	private Field field;
 	private int bankBalance;
-	private int totalProfit = 0;
+	private static int totalProfit = 0;
 	private boolean hasWeedKiller = false;
 	private boolean hasCarrots = false;
 
@@ -33,7 +33,6 @@ public class Farm {
 	public void setBankBalanance(int bankBalance) {
 		this.bankBalance = bankBalance;
 	}
-	
 	// kills weeds in a 3x3
 	public void applyWeedKiller(int x, int y) {
 		field.applyWeedKiller(x, y);
@@ -42,7 +41,6 @@ public class Farm {
 				+ "It's super effective!\n"
 				+ "|----------------------|\n");
 	}
-	
 	// farming
 	public void harvest(int x, int y) {
 		// return item or null
@@ -55,18 +53,19 @@ public class Farm {
 			//adds Soil item to this cell
 			field.plant(x, y, new Soil());
 			System.out.println("|----------------------|\n"
-					+ "Item has been harvested\n!"
-					+ "|----------------------|\n");
+					+ "Item has been harvested\n"
+					+ "|----------------------|");
 		} else {
 			System.out.println("|----------------------|\n"
 					+ "Cannot be harvested.\n"
 					+ "|----------------------|\n");
 		}
+	// returns total profit of harvest
 	}
 	// 1 tick passes
 	public void toWait() {
 		 field.tick();
-		 // %80 chance occurrence
+		 // chance occurrence
 		 field.checkRabbitRaid();
 		 System.out.println("|----------------------|\n"
 		 		+ "And so you wait...\n"
@@ -75,7 +74,7 @@ public class Farm {
 	
 	public void shopOptions() {
 		while (true) {
-			System.out.println("\n_________________________________\n"
+			System.out.println("_________________________________\n"
 					+ "| Bank balance: $" + bankBalance+ "\n"
 					+ "________________________________\n"
 					+ "\n--------------------------------\n"
@@ -143,7 +142,7 @@ public class Farm {
 	public void farmingOptions() {
 	
 		while (true) {
-			System.out.println("\n_________________________________\n"
+			System.out.println("_________________________________\n"
 					+ "| Bank balance: $" + bankBalance
 					+ "\n________________________________\n"
 					+ field
@@ -366,6 +365,9 @@ public class Farm {
 			}
 			
 		}
+	}
+	public static int getTotalProfit() {
+		return totalProfit;
 	}
 }
 	

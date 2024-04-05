@@ -14,7 +14,6 @@ public class Apples extends Food implements Cloneable {
 	public Apples clone() {
 		Apples cloned = (Apples) super.clone();
 		// counter: incremental(1)
-		System.out.print("Called from Apples class");
 		generationCount++;
 		return cloned;
 	}

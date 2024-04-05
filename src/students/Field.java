@@ -164,11 +164,10 @@ public class Field {
 	 int soilCount = 0;
 	 int untilledCount = 0;
 	 int weedCount = 0;
+	 int totalValue = 0;
+	 int harvestTotal = 0;
 	 
-	 int totalApplesValue = Apples.getGenerationCount() * Apples.value;
-	 int totalGrainValue = Grain.getGenerationCount() * Grain.value;
-	 int totalCarrotsValue = Carrots.getGenerationCount()* Carrots.value;
-	 int totalValueHarvested = totalApplesValue + totalGrainValue + totalCarrotsValue;
+	 harvestTotal = totalValue + Farm.getTotalProfit();
 	 // iterate through items on Field
 	 for (Item[] row : field) {
 		 for (Item item : row) {
@@ -183,22 +182,24 @@ public class Field {
 				 // if item is an instance 
 				 if (item instanceof Food && item.getValue() > 0) {
 					 // add to total value
-					 totalValueHarvested += item.getValue();
+					 totalValue += item.getValue();
 				}	
 			}
 		}
 	}
 	// return summary as a string
 	return String.format("\n......................\n" + 
-						"Current items on farm field:\n" +
+						"Current items on field:\n"
+						+ "--------------------\n" +
 						"Apples: "+ appleCount +
 						"\nCarrots: "+ carrotCount +
 						"\nGrain: " + grainCount +
 						"\nSoil: " + soilCount +
 						"\nUntilled: " + untilledCount +
 						"\nWeed: " + weedCount +
-						"Harvested items:\n" +
-						"\nFor a total of $: " + totalValueHarvested +
+						"\nHarvested items:\n"
+						+ "--------------------\n" +
+						"\nFor a total of $: " + harvestTotal + "\n"+
 						"\nTotal apples: " + Apples.getGenerationCount() +
 						"\nTotal grain: " + Grain.getGenerationCount() +
 						"\nTotal carrots: " + Carrots.getGenerationCount() +

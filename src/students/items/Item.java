@@ -5,13 +5,13 @@ public abstract class Item implements Cloneable {
 		public int  age = 0;
 		public int maturAge = 0;
 		public int deathAge = 0;
-		public static int value = 0; 
+		public int value = 0; 
 		
 		// constructor
 		public Item(int maturAge, int deathAge, int value) {
 			this.maturAge = maturAge;
 			this.deathAge = deathAge;
-			Item.value = value;
+			this.value = value;
 		}
 
 		// counter: incremental(1)
@@ -69,5 +69,4 @@ public abstract class Item implements Cloneable {
 		
 		public abstract String toString();
 }
-
 
