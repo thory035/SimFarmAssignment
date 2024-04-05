@@ -8,13 +8,13 @@ public class Apples extends Food implements Cloneable {
 	// superclass constructor
 	public Apples() {
 		super(3, 5, 3);
+		// counter: incremental(1)
+		generationCount++;
 	}
 	
 	@Override
 	public Apples clone() {
 		Apples cloned = (Apples) super.clone();
-		// counter: incremental(1)
-		generationCount++;
 		return cloned;
 	}
 	

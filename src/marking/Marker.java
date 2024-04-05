@@ -34,7 +34,7 @@ public class Marker {
 		System.out.println(a.died()); // should print false
 //		a.tick();
 		System.out.println(a.died()); // should print true
-	Food testFood = a; // this should be possible
+		Food testFood = a; // this should be possible
 		Item testItem = testFood; // this should be possible
 
 	System.out.println(new Weed()); // should print "#"

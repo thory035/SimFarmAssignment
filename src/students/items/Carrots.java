@@ -8,13 +8,14 @@ public class Carrots extends Food implements Cloneable {
 	// superclass constructor
 	public Carrots() {
 		super(2, 5, 5);
+		// counter: incremental(1)
+		generationCount++;
 	}
 	
 	@Override
 	public Carrots clone() {
 		Carrots cloned = (Carrots) super.clone();
-		// counter: incremental(1)
-		generationCount++;
+
 		return cloned;
 	}
 	

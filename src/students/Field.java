@@ -133,9 +133,7 @@ public class Field {
 		// check if location is inside field
 		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
 			// if dimensions are true, plant item
-			this.field[row][column] = item;
-			
-			
+			this.field[row][column] = item;	
 		}
 			}
 	// calculate total value of all items in the Field

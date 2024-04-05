@@ -8,13 +8,14 @@ public class Grain extends Food implements Cloneable{
 	// superclass constructor
 	public Grain() {
 		super(2, 6, 2);
+		// counter: incremental(1)
+		generationCount++;
 	}
 	
 	@Override
 	public Grain clone() {
 		Grain cloned = (Grain) super.clone();
-		// counter: incremental(1)
-		generationCount++;
+
 		return cloned;
 	}
 	
