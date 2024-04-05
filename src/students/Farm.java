@@ -347,12 +347,10 @@ public class Farm {
 					+ "\nEnter action [...]\n"
 					+ "\n> [f ] Farm"
 					+ "\n> [s ] Shop "
-					+ "\n> [fs] Field Summary");
-			// for testing and debugging
-			//+ "\n> [q ] Quit");
+					+ "\n> [fs] Field Summary"
+					+ "\n> [q ] Quit");
 			System.out.print("> ");
 			String input = scanner.nextLine();
-			//for testing and debugging
 			if ("q".equals(input)) {
 				System.out.println("Quitting...");
 				System.exit(0);
