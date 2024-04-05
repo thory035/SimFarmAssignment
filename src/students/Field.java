@@ -62,6 +62,7 @@ public class Field {
 	public String toString() {
 		// initialises for alignment	
 			StringBuilder align = new StringBuilder (" ");
+			// iterates the header
 			for (int header = 1; header <= field[0].length; header++) {
 				align.append(header > 9 ? header: " " + header).append(" ");
 			}
@@ -95,6 +96,7 @@ public class Field {
 	
 	
 	public void pull(int row, int column) {
+		// at this column and row location
 		if (row >= 0 && row < field.length && column >= 0 && column < field[row].length) {
 				// check if item is weed
 				if (field[row][column] instanceof Weed) {
@@ -164,11 +166,12 @@ public class Field {
 	 int weedCount = 0;
 	 int totalValue = 0;
 	 int harvestTotal = 0;
-	 
+	 // total value of harvested items
 	 harvestTotal = totalValue + Farm.getTotalProfit();
 	 // iterate through items on Field
-	 for (Item[] row : field) {
-		 for (Item item : row) {
+	 for (int row = 0; row < field.length; row++) {
+		 for (int column = 0; column < field[row].length; column++) {
+			 Item item = field[row][column];
 			 if (item != null) {
 				 // increment based on type
 				 if (item instanceof Apples) appleCount++;
@@ -203,7 +206,7 @@ public class Field {
 						"\n| Total carrots: " + Carrots.getGenerationCount() +
 						"\n");
 	}		
-	
+	// 80% chance of rabbit raid
 	public void checkRabbitRaid() {
 		if (countMCarrots() > 2 && Math.random() < 0.8) {
 			commenceRabbits();	
@@ -211,9 +214,12 @@ public class Field {
 	}
 	private int countMCarrots() {
 		int matureCarrotCount = 0;
+		// at this location
 		for (int row = 0; row < field.length; row++) {
 			for (int column = 0; column < field[row].length; column++) {
+			// retrieve object at location and store
 			Item item = field[row][column];
+			// if item is a mature carrot increment counter
 			if (item instanceof Carrots && item.getAge() >= item.getMaturAge()) {
 				matureCarrotCount++;
 				}
@@ -221,15 +227,18 @@ public class Field {
 		}
 		return matureCarrotCount;
 	}
+	// release the rabbits!
 	private void commenceRabbits() {
 		for (int row = 0; row < field.length; row++) {
 			for (int column = 0; column < field[row].length; column++) { 
 				Item item = field[row][column];
 				if (item != null) {
+					// present the raid occurrence with untilledsoil
 					field[row][column] = new UntilledSoil();
 				}
 			}
 		}
+		// message prompt of rabbitRaid
 		System.out.println("Oh no!\n"
 				+ "A rabbit raid has occured!\n"
 				+ "There were too many grown\n"

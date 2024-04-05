@@ -18,23 +18,20 @@ public class Farm {
 	private static int totalProfit = 0;
 	private boolean hasWeedKiller = false;
 	private boolean hasCarrots = false;
-	
+	// constructor
 	public Farm(int fieldWidth, int fieldHeight, int startingFunds) {
 		this.field = new Field(fieldHeight, fieldWidth);
 		this.bankBalance = startingFunds;
 		this.scanner = new Scanner(System.in);
 	}
-	
 	// getter for Shop class to access
 	public int getBankBalance() {
 		return bankBalance;
 	}
-	
 	// setter for Shop class to access
 	public void setBankBalanance(int bankBalance) {
 		this.bankBalance = bankBalance;
 	}
-	
 	// kills weeds in a 3x3
 	public void applyWeedKiller(int x, int y) {
 		field.applyWeedKiller(x, y);
@@ -43,7 +40,6 @@ public class Farm {
 				+ "It's super effective!\n"
 				+ "|----------------------|\n");
 	}
-	
 	// farming
 	public void harvest(int x, int y) {
 		// return item or null
@@ -64,7 +60,6 @@ public class Farm {
 					+ "|----------------------|\n");
 		}
 	}
-	
 	// 1 tick passes
 	public void toWait() {
 		 field.tick();
@@ -95,8 +90,9 @@ public class Farm {
 			switch (input.toLowerCase()) {
 			case "wk":
 				if (hasWeedKiller) {
-					System.out.println("Already purchased."
-							+ "|----------------------|\n");
+					System.out.println("|----------------------|\n"
+							+ "Already purchased.\n"
+							+ "|----------------------|");
 				} else {
 					// calculations for purchase
 					if (getBankBalance() >= 10) {
@@ -108,11 +104,13 @@ public class Farm {
 							+ "|----------------------|\n");
 					} else {
 						System.out.println("|----------------------|\n"
-								+ "Not enough funds.\n");
+								+ "Not enough funds.\n"
+								+ "|----------------------|");
 					}
 				}
 				break;
 			case "c":
+				// purchased carrot seed
 				if (hasCarrots) {
 					System.out.println("|----------------------|\n"
 							+ "Already purchased\n"
@@ -125,18 +123,19 @@ public class Farm {
 					System.out.print("|----------------------|\n"
 							+ "Carrot seeds purchased!\n"
 							+ "You can now plant carrots.\n"
-							+ "|----------------------|\n");
+							+ "|----------------------|");
 					} else {
 					System.out.println("|----------------------|\n"
 							+ "Not enough funds.\n"
-							+ "|----------------------|\n");
+							+ "|----------------------|");
 				}
 			}
 				break;
+			// view field summary and end game
 			case "ss":
 				System.out.print(field.getSummary());
 				System.out.print("| Thank you for playing!\n"
-						+ "|......................|\n");
+						+ "|......................|");
 				System.exit(0);
 				break;
 				
@@ -147,15 +146,15 @@ public class Farm {
 			}
 		}
 	}
-	
+	// gets the farmnName input
 	public static String getFarmName() {
 		return farmName;
 	}
-
+	// sets the input
 	public void setFarmName(String farmName) {
 		this.farmName = farmName;
 	}
-
+	// contains farming actions
 	public void farmingOptions() {
 		while (true) {
 			System.out.println( "\n" + field
@@ -176,7 +175,7 @@ public class Farm {
 			}
 			System.out.print(">> [w ] Wait\n"
 					+ ">> [fs] Field Summary\n"
-					+ "<< [b ] Return to main menu\n");
+					+ "<< [b ] Return to main menu");
 			System.out.print("> ");
 			String input = scanner.nextLine();
 			
@@ -195,7 +194,7 @@ public class Farm {
 					 System.out.println("|----------------------|\n"
 					 		+ "You do not have\n "
 					 		+ "Weed Killer.\n"
-					 		+ "|----------------------|\n");
+					 		+ "|----------------------|");
 					 break;
 				 }
 				String[] parts = input.split("");
@@ -206,12 +205,13 @@ public class Farm {
 						// correctly map zero-based indexing system
 						x = Integer.parseInt(cells[1]) - 1;
 						y = Integer.parseInt(cells[2]) - 1;
+						// 3x3 area of affect
 						applyWeedKiller(x, y); 
 					} else {
-						System.out.print("|----------------------|"
+						System.out.print("|----------------------|\n"
 								+ "Tool can only be\n"
 								+ "applied to weeds.\n"
-								+ "|----------------------|\n");
+								+ "|----------------------|");
 					}
 				}
 				break;
@@ -254,7 +254,7 @@ public class Farm {
 									+ ">> [g] Grain $" + Grain.cost + "\n");
 							// if carrots have been purchased 
 							if (hasCarrots) {
-									System.out.print(">> [c] Carrot $" + Carrots.cost + "\n");
+									System.out.print(">> [c] Carrot $" + Carrots.cost + "");
 								}
 							 System.out.print("> ");
 							String option = scanner.nextLine();
@@ -266,14 +266,14 @@ public class Farm {
 								if(bankBalance >= Apples.cost) {
 									field.plant(x, y, new Apples());
 									bankBalance -= Apples.cost;
-									System.out.println("\n|----------------------|\n"
+									System.out.println("|----------------------|\n"
 											+ "Apple has been planted!\n"
 											+ "|----------------------|");
 									break;
 								} else {
 									System.out.println("|----------------------|\n"
 											+ "Sorry, not enough funds :(\n"
-											+ "|----------------------|\n");
+											+ "|----------------------|");
 								}
 							break;
 							// plant grain
@@ -289,7 +289,7 @@ public class Farm {
 								} else {
 									System.out.println("|----------------------|\n"
 											+ "Sorry, not enough funds :(\n"
-											+ "|----------------------|\n");
+											+ "|----------------------|");
 								}
 								break;
 								// plant grain
@@ -297,7 +297,7 @@ public class Farm {
 								if (!hasCarrots) {
 									 System.out.println("|----------------------|\n"
 									 		+ "You do not have carrots.\n"
-									 		+ "|----------------------|\n");
+									 		+ "|----------------------|");
 									 break;
 								}
 								// calculations for purchase
@@ -311,7 +311,7 @@ public class Farm {
 								} else {
 									System.out.println("|----------------------|\n"
 											+ "Sorry, not enough funds :(\n"
-											+ "|----------------------|\n");
+											+ "|----------------------|");
 								}
 									break;
 						default:
@@ -334,7 +334,6 @@ public class Farm {
 				+ "Name your farm:");
 		System.out.print("> ");
 		this.setFarmName(scanner.nextLine());
-
 		System.out.print( "\n----------------------|\n"
 				+ "|" + farmName + " farm,\n"
 				+ "|what a wonderful\n"
@@ -357,7 +356,6 @@ public class Farm {
 			// for testing and debugging
 			//+ "\n> [q ] Quit");
 			System.out.print("> ");
-			
 			String input = scanner.nextLine();
 			//for testing and debugging
 			if ("q".equals(input)) {
@@ -382,11 +380,9 @@ public class Farm {
 						+ "Please try again.\n"
 						+ "|----------------------|\n");
 			}
-			
 		}
 	}
 	public static int getTotalProfit() {
 		return totalProfit;
 	}
 }
-	
