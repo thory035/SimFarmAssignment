@@ -350,12 +350,13 @@ public class Farm {
 			System.out.print("> ");
 			
 			String input = scanner.nextLine();
-			
+			//for testing and debugging
 			if ("q".equals(input)) {
 				System.out.println("Quitting...");
 				System.exit(0);
 			}
 			try {
+				//
 				switch (input.toLowerCase()) {
 					case "f":
 						farmingOptions();
