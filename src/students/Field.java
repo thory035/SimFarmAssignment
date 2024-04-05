@@ -189,21 +189,21 @@ public class Field {
 	}
 	// return summary as a string
 	return String.format("\n......................\n" + 
-						"Current items on field:\n"
-						+ "--------------------\n" +
-						"Apples: "+ appleCount +
-						"\nCarrots: "+ carrotCount +
-						"\nGrain: " + grainCount +
-						"\nSoil: " + soilCount +
-						"\nUntilled: " + untilledCount +
-						"\nWeed: " + weedCount +
+						"Items on " + Farm.getFarmName() + "farm:\n"
+						+ "......................" +
+						"\n| Apples: "+ appleCount +
+						"\n| Carrots: "+ carrotCount +
+						"\n| Grain: " + grainCount +
+						"\n| Soil: " + soilCount +
+						"\n| Untilled: " + untilledCount +
+						"\n| Weed: " + weedCount +
 						"\nHarvested items:\n"
-						+ "--------------------\n" +
-						"\nFor a total of $: " + harvestTotal + "\n"+
-						"\nTotal apples: " + Apples.getGenerationCount() +
-						"\nTotal grain: " + Grain.getGenerationCount() +
-						"\nTotal carrots: " + Carrots.getGenerationCount() +
-						"\n......................\n");
+						+ "......................" +
+						"\n| For a total of $: " + harvestTotal +
+						"\n| Total apples: " + Apples.getGenerationCount() +
+						"\n| Total grain: " + Grain.getGenerationCount() +
+						"\n| Total carrots: " + Carrots.getGenerationCount() +
+						"\n");
 	}		
 	
 	public void checkRabbitRaid() {
