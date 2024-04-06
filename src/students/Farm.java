@@ -161,7 +161,7 @@ public class Farm {
 					+ "Farming..."
 					+ "\n--------------------------------\n"
 					+ "\nEnter action [..], "
-					+ "\nthen location [x,y]\n"
+					+ "\nthen location [row,col]\n"
 					+ "\nFarm Menu\n"
 					+ ">> [t ] Till\n"
 					+ ">> [h ] Harvest\n"
@@ -174,7 +174,7 @@ public class Farm {
 			System.out.print(">> [w ] Wait\n"
 					+ ">> [fs] Field Summary\n"
 					+ "<< [b ] Return to main menu");
-			System.out.print("> ");
+			System.out.print("> \n");
 			String input = scanner.nextLine();
 			if ("b".equals(input)) {
 				return;
